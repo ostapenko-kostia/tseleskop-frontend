@@ -1,10 +1,10 @@
 import { api } from '../../lib/axios'
 import { setAccessToken } from './auth.helper'
 import { useAuthStore } from '../../store/auth.store'
-import { InitDataWithPin } from '../../types/telegram'
+import { InitData } from '@telegram-apps/sdk'
 
 class AuthService {
-	async auth(data: InitDataWithPin) {
+	async auth(data: InitData) {
 		const res = await api.post('/auth/telegram', data)
 		if (res?.data) {
 			setAccessToken(res.data.accessToken)

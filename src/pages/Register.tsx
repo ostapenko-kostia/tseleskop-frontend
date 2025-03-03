@@ -23,9 +23,7 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
-		if (tgWebAppData) {
-			mutate({ pin, ...tgWebAppData! })
-		}
+		if (tgWebAppData) mutate(tgWebAppData)
 
 		console.log(tgWebAppData)
 	}, [])
