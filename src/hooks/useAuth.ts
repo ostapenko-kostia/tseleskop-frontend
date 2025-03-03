@@ -6,10 +6,11 @@ export function useAuth() {
 	return useMutation({
 		mutationFn: async (data: {
 			first_name: string
-			last_name: string
+			last_name?: string
 			id: number
-			username: string
-			photo_url: string
+			username?: string
+			photo_url?: string
+			hash?: string
 			pin: string
 		}) => {
 			return await authService.auth(data)

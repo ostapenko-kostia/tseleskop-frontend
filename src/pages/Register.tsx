@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Button } from '../components/ui/button'
+import { retrieveLaunchParams } from '@telegram-apps/sdk'
 import {
 	RegisterTitle,
 	RegisterUserInfo,
@@ -10,6 +11,9 @@ import {
 import { useAuth } from '../hooks/useAuth'
 
 export function RegisterPage() {
+	const { tgWebAppData } = retrieveLaunchParams()
+	const user = tgWebAppData?.user
+
 	const [personalDataAgreement, setPersonalDataAgreement] =
 		useState<boolean>(true)
 
@@ -20,9 +24,6 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
-		const tg = window?.Telegram?.WebApp
-		const user = tg?.initDataUnsafe?.user
-
 		if (
 			user?.first_name &&
 			user?.last_name &&
@@ -30,10 +31,10 @@ export function RegisterPage() {
 			user?.username &&
 			user?.photo_url
 		) {
-			mutate({ pin, ...user })
+			mutate({ pin, hash: tgWebAppData?.hash, ...user })
 		}
 
-		console.log(window?.Telegram)	
+		console.log(tgWebAppData)
 	}, [])
 
 	return (

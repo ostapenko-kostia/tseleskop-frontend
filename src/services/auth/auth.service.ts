@@ -5,11 +5,12 @@ import { useAuthStore } from '../../store/auth.store'
 class AuthService {
 	async auth(data: {
 		first_name: string
-		last_name: string
-		username: string
+		last_name?: string
+		username?: string
 		id: number
-		photo_url: string
+		photo_url?: string
 		pin: string
+		hash?: string
 	}) {
 		const res = await api.post('/auth/telegram', data)
 		if (res?.data) {
