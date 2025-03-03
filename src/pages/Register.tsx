@@ -12,7 +12,6 @@ import { useAuth } from '../hooks/useAuth'
 
 export function RegisterPage() {
 	const { tgWebAppData } = retrieveLaunchParams()
-	const user = tgWebAppData?.user
 
 	const [personalDataAgreement, setPersonalDataAgreement] =
 		useState<boolean>(true)
@@ -24,14 +23,8 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
-		if (
-			user?.first_name &&
-			user?.last_name &&
-			user?.id &&
-			user?.username &&
-			user?.photo_url
-		) {
-			mutate({ pin, hash: tgWebAppData?.hash, ...user })
+		if (tgWebAppData) {
+			mutate({ pin, ...tgWebAppData! })
 		}
 
 		console.log(tgWebAppData)
@@ -60,7 +53,7 @@ export function RegisterPage() {
 					onClick={auth}
 					className='mt-10'
 					disabled={
-						!pin.trim().length ||
+						pin.trim().length !== 4 ||
 						!privacyPolicyAgreement ||
 						!personalDataAgreement ||
 						isPending

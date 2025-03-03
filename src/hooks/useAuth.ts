@@ -1,18 +1,11 @@
 import { authService } from '../services/auth/auth.service'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
+import { InitDataWithPin } from '../types/telegram'
 
 export function useAuth() {
 	return useMutation({
-		mutationFn: async (data: {
-			first_name: string
-			last_name?: string
-			id: number
-			username?: string
-			photo_url?: string
-			hash?: string
-			pin: string
-		}) => {
+		mutationFn: async (data: InitDataWithPin) => {
 			return await authService.auth(data)
 		},
 		onSuccess: () => {
