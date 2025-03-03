@@ -9,3 +9,32 @@
 body {
 	font-family: 'Inter', sans-serif;
 }
+
+.checkbox {
+	appearance: none;
+	-webkit-appearance: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	padding: 0.1rem;
+	border: 1px solid #27448D;
+	background-color: white;
+	border-radius: 0.4rem;
+	width: 20px !important;
+	height: 20px;
+	aspect-ratio: 1/1;
+}
+
+.checkbox::before {
+	content: '✓';
+	transform: scale(0);
+	color: #27448D;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.checkbox:checked::before {
+	transform: scale(1);
+}
+

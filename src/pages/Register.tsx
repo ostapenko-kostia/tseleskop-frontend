@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Button } from '../components/ui/button'
 import {
 	RegisterTitle,
@@ -7,6 +7,7 @@ import {
 	RegisterPin,
 	RegisterUsername,
 } from '../components/register'
+import { useAuth } from '../hooks/useAuth'
 
 export function RegisterPage() {
 	const [personalDataAgreement, setPersonalDataAgreement] =
@@ -16,6 +17,24 @@ export function RegisterPage() {
 		useState<boolean>(true)
 
 	const [pin, setPin] = useState<string>('')
+	const { mutate, isPending } = useAuth()
+
+	const auth = useCallback(() => {
+		const tg = window?.Telegram?.WebApp
+		const user = tg?.initDataUnsafe?.user
+
+		if (
+			user?.first_name &&
+			user?.last_name &&
+			user?.id &&
+			user?.username &&
+			user?.photo_url
+		) {
+			mutate({ pin, ...user })
+		}
+
+		console.log(user)	
+	}, [])
 
 	return (
 		<section
@@ -37,8 +56,14 @@ export function RegisterPage() {
 
 			<div className='flex w-full justify-center'>
 				<Button
+					onClick={auth}
 					className='mt-10'
-					disabled={!pin || !privacyPolicyAgreement || !personalDataAgreement}
+					disabled={
+						!pin.trim().length ||
+						!privacyPolicyAgreement ||
+						!personalDataAgreement ||
+						isPending
+					}
 				>
 					Далее
 				</Button>
