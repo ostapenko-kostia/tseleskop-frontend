@@ -33,7 +33,7 @@ export function RegisterPage() {
 			mutate({ pin, ...user })
 		}
 
-		console.log(user)	
+		console.log(window?.Telegram)	
 	}, [])
 
 	return (
