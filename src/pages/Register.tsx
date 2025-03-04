@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { Button } from '../components/ui/button'
-import { initData } from '@telegram-apps/sdk'
 import {
 	RegisterTitle,
 	RegisterUserInfo,
@@ -21,9 +20,16 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
-		if (initData) mutate(JSON.parse(initData.raw()!))
+		if (window.Telegram && window.Telegram.WebApp) {
+			window.Telegram.WebApp.ready()
 
-		console.log(initData.raw())
+			const initData = window.Telegram.WebApp.initData
+
+			mutate(JSON.parse(initData))
+			console.log(initData)
+		} else {
+			console.error('Telegram Web App is not available')
+		}
 	}, [])
 
 	return (
