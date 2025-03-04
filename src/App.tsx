@@ -1,13 +1,16 @@
-import { Route, Routes } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
 import { HomePage, RegisterPage } from './pages'
 import { useEffect } from 'react'
 import { useAuthStore } from './store/auth.store'
 
 function App() {
 	const { isAuth } = useAuthStore()
+	const location = useLocation()
+
 	useEffect(() => {
-		if (!isAuth) window.location.href = '/register'
+		if (!isAuth && location.pathname !== 'register') window.location.href = '/register'
 	}, [])
+
 	return (
 		<Routes>
 			<Route path='/' element={<HomePage />} />
