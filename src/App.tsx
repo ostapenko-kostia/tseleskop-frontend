@@ -7,8 +7,11 @@ function App() {
 	const { isAuth } = useAuthStore()
 	const location = useLocation()
 
+	console.log(location.pathname)
+
 	useEffect(() => {
-		if (!isAuth && location.pathname !== 'register') window.location.href = '/register'
+		if (!isAuth && !location.pathname.includes('register'))
+			window.location.href = '/register'
 	}, [])
 
 	return (
