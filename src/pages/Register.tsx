@@ -24,8 +24,7 @@ export function RegisterPage() {
 
 	const auth = useCallback(() => {
 		// @ts-ignore
-		console.log(window.getUser)
-		console.log(tgWebAppStartParam)
+		console.log(window.Telegram.WebApp)
 		if (tgWebAppData) mutate(tgWebAppData)
 
 		console.log(tgWebAppData)
