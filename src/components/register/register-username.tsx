@@ -1,4 +1,7 @@
+import { useAuthStore } from '../../store/auth.store'
+
 export function RegisterUsername() {
+	const { user } = useAuthStore()
 	return (
 		<>
 			<table className='w-full text-center text-white'>
@@ -10,7 +13,13 @@ export function RegisterUsername() {
 					<tr>
 						<th>Логин публичный</th>
 						<th className='text-xs border-l'>
-							<button>Копировать</button>
+							<button
+								onClick={() =>
+									navigator.clipboard.writeText(user?.username || '')
+								}
+							>
+								Копировать
+							</button>
 						</th>
 						<th className='text-xs border-l'>
 							<button>Изменить</button>
@@ -19,7 +28,7 @@ export function RegisterUsername() {
 				</thead>
 				<tbody className='text-black'>
 					<tr>
-						<td className='py-1 font-bold'>Slava_Kovalev288</td>
+						<td className='py-1 font-bold'>{user?.username}</td>
 					</tr>
 				</tbody>
 			</table>

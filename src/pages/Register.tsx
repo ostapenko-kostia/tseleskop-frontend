@@ -22,8 +22,6 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = () => {
-		console.log(initData)
-		console.log(pin)
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
