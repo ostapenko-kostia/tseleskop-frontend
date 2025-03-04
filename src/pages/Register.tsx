@@ -22,11 +22,10 @@ export function RegisterPage() {
 	const auth = useCallback(() => {
 		if (window.Telegram && window.Telegram.WebApp) {
 			window.Telegram.WebApp.ready()
-
 			const initData = window.Telegram.WebApp.initData
+			console.log(initData)
 
 			mutate(JSON.parse('{' + initData + '}'))
-			console.log(initData)
 		} else {
 			console.error('Telegram Web App is not available')
 		}
