@@ -23,8 +23,8 @@ export function RegisterPage() {
 
 	const auth = useCallback(() => {
 		console.log(initData)
-		console.log(initDataQueryId)
-		if (initData) mutate({ query_id: initDataQueryId as any, ...initData })
+		console.log(initDataQueryId())
+		if (initData) mutate({ query_id: initDataQueryId(), ...initData })
 
 	}, [])
 
