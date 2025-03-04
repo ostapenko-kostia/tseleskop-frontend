@@ -1,7 +1,6 @@
-import { useAuthStore } from '../../store/auth.store'
+import { InitData } from '@telegram-apps/sdk'
 
-export function RegisterUsername() {
-	const { user } = useAuthStore()
+export function RegisterUsername({ user }: { user: InitData['user'] }) {
 	return (
 		<>
 			<table className='w-full text-center text-white'>

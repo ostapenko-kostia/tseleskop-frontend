@@ -33,8 +33,8 @@ export function RegisterPage() {
 			}}
 		>
 			<RegisterTitle />
-			<RegisterUserInfo />
-			<RegisterUsername />
+			<RegisterUserInfo user={initData?.user} />
+			<RegisterUsername user={initData?.user} />
 			<RegisterAgreements
 				personalDataAgreement={personalDataAgreement}
 				setPersonalDataAgreement={setPersonalDataAgreement}
