@@ -21,9 +21,9 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
-		if (initData) mutate(initData as any)
+		if (initData) mutate(JSON.parse(initData.raw()!))
 
-		console.log(initData)
+		console.log(initData.raw())
 	}, [])
 
 	return (
