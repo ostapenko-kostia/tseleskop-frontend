@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '../components/ui/button'
 import { retrieveLaunchParams } from '@telegram-apps/sdk'
 import {
@@ -21,11 +21,11 @@ export function RegisterPage() {
 	const [pin, setPin] = useState<string>('')
 	const { mutate, isPending } = useAuth()
 
-	const auth = useCallback(() => {
+	const auth = () => {
 		console.log(initData)
 		console.log(pin)
 		if (initData && pin.length === 4) mutate({ initData, pin })
-	}, [])
+	}
 
 	return (
 		<section

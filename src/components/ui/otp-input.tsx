@@ -15,12 +15,10 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 4, onComplete }) => {
 		newOtp[index] = value
 		setOtp(newOtp)
 
+		onComplete(newOtp.join(''))
+
 		if (value && index < length - 1) {
 			inputsRef.current[index + 1]?.focus()
-		}
-
-		if (newOtp.every(digit => digit !== '')) {
-			onComplete(newOtp.join(''))
 		}
 	}
 
@@ -33,7 +31,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 4, onComplete }) => {
 	return (
 		<div className='flex gap-2'>
 			{otp.map((digit, index) => (
-				<div key={index}>
+				<div key={index} className='relative'>
 					<input
 						ref={el => {
 							inputsRef.current[index] = el
@@ -45,9 +43,10 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 4, onComplete }) => {
 						onKeyDown={e => handleKeyDown(index, e)}
 						className='w-10 h-10 text-center text-xl font-medium outline-none'
 					/>
-					<hr
-						className='h-0.5 w-full'
+					<div
+						className='absolute bottom-0 left-0 right-0'
 						style={{
+							height: '2px',
 							background: 'linear-gradient(90deg, #2F51A8 0%, #122042 100%)',
 						}}
 					/>
