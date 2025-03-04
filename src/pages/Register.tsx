@@ -25,7 +25,7 @@ export function RegisterPage() {
 
 			const initData = window.Telegram.WebApp.initData
 
-			mutate(JSON.parse(initData))
+			mutate(JSON.parse('{' + initData + '}'))
 			console.log(initData)
 		} else {
 			console.error('Telegram Web App is not available')
