@@ -5,7 +5,7 @@ import { InitData } from '@telegram-apps/sdk'
 
 export function useAuth() {
 	return useMutation({
-		mutationFn: async (data: InitData) => {
+		mutationFn: async (data: { initData: InitData; pin: string }) => {
 			return await authService.auth(data)
 		},
 		onSuccess: () => {

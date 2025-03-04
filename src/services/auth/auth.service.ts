@@ -4,7 +4,7 @@ import { useAuthStore } from '../../store/auth.store'
 import { InitData } from '@telegram-apps/sdk'
 
 class AuthService {
-	async auth(data: InitData) {
+	async auth(data: { initData: InitData; pin: string }) {
 		const res = await api.post('/auth/telegram', data)
 		if (res?.data) {
 			setAccessToken(res.data.accessToken)

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { Button } from '../components/ui/button'
-import { initDataQueryId, retrieveLaunchParams } from '@telegram-apps/sdk'
+import { retrieveLaunchParams } from '@telegram-apps/sdk'
 import {
 	RegisterTitle,
 	RegisterUserInfo,
@@ -23,9 +23,8 @@ export function RegisterPage() {
 
 	const auth = useCallback(() => {
 		console.log(initData)
-		console.log(initDataQueryId())
-		if (initData) mutate({ query_id: initDataQueryId(), ...initData })
-
+		console.log(pin)
+		if (initData && pin.length === 4) mutate({ initData, pin })
 	}, [])
 
 	return (
