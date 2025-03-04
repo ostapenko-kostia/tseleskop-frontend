@@ -22,7 +22,7 @@ jobs:
           
       - name: Deploy to server
         run: |
-          ssh -i ~/.ssh/id_rsa user@your-server-ip << 'EOF'
+          ssh -i ~/.ssh/id_rsa root@45.10.41.225 << 'EOF'
             cd /var/www/tseleskop-frontend
             git pull origin main
             bun install
