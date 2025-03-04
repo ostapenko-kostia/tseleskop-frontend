@@ -23,6 +23,9 @@ export function RegisterPage() {
 	const { mutate, isPending } = useAuth()
 
 	const auth = useCallback(() => {
+		const urlParams = new URLSearchParams(window.location.search)
+		const queryId = urlParams.get('query_id')
+		console.log(queryId)
 		if (tgWebAppData) mutate(tgWebAppData)
 
 		console.log(tgWebAppData)
