@@ -11,6 +11,8 @@ import {
 import { useAuth } from '../hooks/useAuth'
 
 export function RegisterPage() {
+	// @ts-ignore
+	console.log(window.Telegram)
 	const { tgWebAppData: initData } = retrieveLaunchParams()
 	const [personalDataAgreement, setPersonalDataAgreement] =
 		useState<boolean>(true)
