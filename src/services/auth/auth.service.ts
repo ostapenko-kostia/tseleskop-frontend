@@ -1,8 +1,9 @@
+import { InitData } from '@telegram-apps/sdk'
 import { api } from '../../lib/axios'
 import { useAuthStore } from '../../store/auth.store'
 
 class AuthService {
-	async auth(data: { initData: any; pin: string }) {
+	async auth(data: { initData: InitData; pin: string }) {
 		const res = await api.post('/auth/telegram', data)
 		if (res?.data) {
 			useAuthStore.setState({ user: res.data.user, isAuth: true })
