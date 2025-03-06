@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../components/ui/button'
-// import { retrieveLaunchParams } from '@telegram-apps/sdk'
 import {
 	RegisterTitle,
 	RegisterUserInfo,
@@ -11,7 +10,6 @@ import {
 import { useAuth } from '../hooks/useAuth'
 
 export function RegisterPage() {
-	// const { tgWebAppData: initData } = retrieveLaunchParams()
 	// @ts-ignore
 	const initData = window.Telegram.WebApp.initData
 	// const initData =
