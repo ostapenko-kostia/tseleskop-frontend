@@ -1,4 +1,5 @@
 import { InitData } from '@telegram-apps/sdk'
+import toast from 'react-hot-toast'
 
 export function RegisterUsername({ user }: { user: InitData['user'] }) {
 	return (
@@ -13,9 +14,11 @@ export function RegisterUsername({ user }: { user: InitData['user'] }) {
 						<th>Логин публичный</th>
 						<th className='text-xs border-l'>
 							<button
-								onClick={() =>
+								className='cursor-pointer'
+								onClick={() => {
 									navigator.clipboard.writeText(user?.username || '')
-								}
+									toast.success('Скопировано!')
+								}}
 							>
 								Копировать
 							</button>

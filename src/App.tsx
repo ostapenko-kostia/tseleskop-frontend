@@ -10,7 +10,7 @@ function App() {
 	useEffect(() => {
 		if (!isAuth && !location.pathname.includes('register'))
 			window.location.href = '/register'
-	}, [])
+	}, [isAuth])
 
 	return (
 		<Routes>

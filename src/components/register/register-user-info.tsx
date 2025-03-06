@@ -13,10 +13,13 @@ export function RegisterUserInfo({ user }: { user: InitData['user'] }) {
 				</h2>
 				<ul className='text-sm flex items-center gap-4 max-[351px]:gap-2 max-[351px]:text-[13px]'>
 					<li>
-						<a href='#'>Сменить ФИО</a>
+						<a href='#'>Сменить Имя</a>
 					</li>
 					<li className='list-["|"] list-outside pl-2 max-[351px]:pl-1'>
 						<a href='#'>Сменить Фото</a>
+					</li>
+					<li className='list-["|"] list-outside pl-2 max-[351px]:pl-1'>
+						<a href='#'>Сменить PIN</a>
 					</li>
 				</ul>
 			</div>
