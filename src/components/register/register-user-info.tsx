@@ -1,6 +1,4 @@
-import { InitData } from '@telegram-apps/sdk'
-
-export function RegisterUserInfo({ user }: { user: InitData['user'] }) {
+export function RegisterUserInfo({ user }: { user: any }) {
 	return (
 		<div className='py-8 px-4 flex items-center gap-5 max-[330px]:gap-3'>
 			<img

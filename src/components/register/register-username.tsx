@@ -1,6 +1,4 @@
-import { InitData } from '@telegram-apps/sdk'
-
-export function RegisterUsername({ user }: { user: InitData['user'] }) {
+export function RegisterUsername({ user }: { user: any }) {
 	return (
 		<>
 			<table className='w-full text-center text-white'>
