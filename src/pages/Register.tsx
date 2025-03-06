@@ -8,7 +8,7 @@ import {
 	RegisterUsername,
 } from '../components/register'
 import { useAuth } from '../hooks/useAuth'
-import { parseInitDataQuery } from '@telegram-apps/sdk'
+import { InitData, parseInitDataQuery } from '@telegram-apps/sdk'
 import { useNavigate } from 'react-router'
 
 export function RegisterPage() {
