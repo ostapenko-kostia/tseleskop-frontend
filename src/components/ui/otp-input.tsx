@@ -36,12 +36,12 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 4, onComplete }) => {
 						ref={el => {
 							inputsRef.current[index] = el
 						}}
-						type='text'
+						type='number'
 						value={digit}
 						maxLength={1}
 						onChange={e => handleChange(index, e.target.value)}
 						onKeyDown={e => handleKeyDown(index, e)}
-						className='w-10 h-10 text-center text-xl font-medium outline-none'
+						className='w-10 h-10 text-center text-xl font-medium outline-none appearance-none'
 					/>
 					<div
 						className='absolute bottom-0 left-0 right-0'
