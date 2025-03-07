@@ -26,7 +26,7 @@ api.interceptors.response.use(
 
 		if (
 			(error?.response?.status === 401 || error?.response?.status === 403) &&
-			!originalRequest?._isRetry
+			!originalRequest?._isRetry && !error.response.request.responseURL.includes('refresh')
 		) {
 			originalRequest._isRetry = true
 			try {
