@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from 'react-router'
 import { HomePage, RegisterPage } from './pages'
 import { useEffect } from 'react'
 import { useAuthStore } from './store/auth.store'
+import { SettingsPage } from './pages/SettingsPage'
 
 function App() {
 	const { isAuth } = useAuthStore()
@@ -16,6 +17,7 @@ function App() {
 		<Routes>
 			<Route path='/' element={<HomePage />} />
 			<Route path='/register' element={<RegisterPage />} />
+			<Route path='/settings' element={<SettingsPage />} />
 		</Routes>
 	)
 }

@@ -6,7 +6,7 @@ export function RegisterTitle() {
 				background: 'linear-gradient(90deg, #27448D 0%, #0B1327 100%)',
 			}}
 		>
-			Регистрация
+			Регистрация / Вход
 		</h1>
 	)
 }

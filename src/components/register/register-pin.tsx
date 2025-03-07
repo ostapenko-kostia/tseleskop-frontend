@@ -13,7 +13,7 @@ export function RegisterPin({ setPin }: Props) {
 					background: 'linear-gradient(90deg, #2F51A8 0%, #122042 100%)',
 				}}
 			>
-				Придумайте PIN
+				Придумайте / Введите PIN
 			</div>
 			<div className='relative p-[3px] rounded-xl'>
 				<div
