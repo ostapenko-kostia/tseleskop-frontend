@@ -39,6 +39,8 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 4, onComplete }) => {
 						type='number'
 						value={digit}
 						maxLength={1}
+						pattern='[0-9]*'
+						inputMode='numeric'
 						onChange={e => handleChange(index, e.target.value)}
 						onKeyDown={e => handleKeyDown(index, e)}
 						className='w-10 h-10 text-center text-xl font-medium outline-none appearance-none'
