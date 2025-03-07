@@ -1,4 +1,5 @@
 import { TOKEN } from '../../types/enum'
-import Cookies from 'js-cookie'
 
-export const getAccessToken = () => Cookies.get(TOKEN.ACCESS_TOKEN)
+export const getAccessToken = () => localStorage.getItem(TOKEN.ACCESS_TOKEN)
+export const setAccessToken = (i: string) =>
+	localStorage.setItem(TOKEN.ACCESS_TOKEN, i)
