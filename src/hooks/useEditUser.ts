@@ -9,7 +9,7 @@ export function useEditUser(cb?: () => void) {
 			id,
 			data,
 		}: {
-			id: number
+			id: string
 			data: {
 				firstName?: string
 				lastName?: string

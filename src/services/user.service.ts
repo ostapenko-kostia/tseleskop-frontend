@@ -3,7 +3,7 @@ import { IUser } from '../types/user'
 
 class UserService {
 	async editUser(
-		id: number,
+		id: string,
 		data: {
 			firstName?: string
 			lastName?: string
