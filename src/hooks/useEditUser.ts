@@ -42,8 +42,6 @@ export function useEditUserPhoto(cb?: () => void) {
 		}) => {
 			const formData = new FormData()
 			const file = data.photo.item(0)!
-			
-			alert(file.name)
 
 			formData.append('image', file)
 			const res = await userService.editUserPhoto(id, formData)
@@ -56,7 +54,7 @@ export function useEditUserPhoto(cb?: () => void) {
 			cb?.()
 		},
 		onError: error => {
-			alert(error?.message)
+			alert(error)
 		}
 	})
 }
