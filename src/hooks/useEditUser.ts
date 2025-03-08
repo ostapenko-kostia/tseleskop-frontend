@@ -45,7 +45,7 @@ export function useEditUserPhoto(cb?: () => void) {
 
 			const newFileName = file.name.toLowerCase().replace(/\.[^/.]+$/, '.png')
 
-			const newFile = new File([file], newFileName, { type: file.type })
+			const newFile = new File([file], newFileName, { type: 'image/png' })
 
 			formData.append('image', newFile)
 			const res = await userService.editUserPhoto(id, formData)
