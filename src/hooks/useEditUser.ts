@@ -53,5 +53,8 @@ export function useEditUserPhoto(cb?: () => void) {
 			useAuthStore.setState({ user: data.data })
 			cb?.()
 		},
+		onError: error => {
+			alert(error.message)
+		}
 	})
 }
