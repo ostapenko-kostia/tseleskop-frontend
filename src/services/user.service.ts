@@ -15,7 +15,7 @@ class UserService {
 	}
 
 	async editUserPhoto(id: string, formData: FormData) {
-		console.log((formData.get('image') as File).name)
+		 alert((formData.get('image') as File).name)
 		return await api.put<IUser>(`/user/edit-photo/${id}`, formData, {
 			headers: { 'Content-Type': 'multipart/form-data' },
 		})
