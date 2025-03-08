@@ -54,7 +54,7 @@ export function useEditUserPhoto(cb?: () => void) {
 			cb?.()
 		},
 		onError: error => {
-			alert(error.message)
+			alert(error?.message)
 		}
 	})
 }
