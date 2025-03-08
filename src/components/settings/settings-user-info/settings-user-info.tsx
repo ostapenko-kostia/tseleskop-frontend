@@ -1,16 +1,25 @@
 import { useAuthStore } from '../../../store/auth.store'
 import { Dialog } from '../../ui/dialog'
 import { SettingsEditName } from './settings-edit-name'
+import { SettingsEditPhoto } from './settings-edit-photo'
 import { SettingsEditPin } from './settings-edit-pin'
 
 export function SettingsUserInfo() {
 	const { user } = useAuthStore()
 	return (
 		<div className='py-8 px-4 flex items-center gap-5 max-[330px]:gap-3'>
-			<img
-				className='w-[100px] h-[100px] max-[390px]:w-[70px] max-[390px]:h-[70px] aspect-square rounded-full'
-				src={user?.photoUrl}
-			/>
+			<Dialog
+				title='Сменить Фото'
+				trigger={
+					<img
+						className='w-[80px] h-[80px] max-[390px]:w-[70px] max-[390px]:h-[70px] aspect-square rounded-full'
+						src={user?.photoUrl}
+					/>
+				}
+			>
+				<SettingsEditPhoto />
+			</Dialog>
+
 			<div className='flex flex-col'>
 				<h2 className='font-bold text-xl max-[390px]:text-lg'>
 					{user?.lastName} {user?.firstName}
@@ -19,7 +28,9 @@ export function SettingsUserInfo() {
 					<li>
 						<Dialog
 							title='Сменить Имя'
-							trigger={<button className='cursor-pointer'>Сменить Имя</button>}
+							trigger={
+								<button className='cursor-pointer'>Сменить Имя</button>
+							}
 						>
 							<SettingsEditName />
 						</Dialog>
@@ -27,7 +38,9 @@ export function SettingsUserInfo() {
 					<li className='list-["|"] list-outside pl-2 max-[351px]:pl-1'>
 						<Dialog
 							title='Сменить PIN'
-							trigger={<button className='cursor-pointer'>Сменить PIN</button>}
+							trigger={
+								<button className='cursor-pointer'>Сменить PIN</button>
+							}
 						>
 							<SettingsEditPin />
 						</Dialog>

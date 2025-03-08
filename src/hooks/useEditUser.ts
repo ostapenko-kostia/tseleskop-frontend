@@ -28,3 +28,28 @@ export function useEditUser(cb?: () => void) {
 		},
 	})
 }
+
+export function useEditUserPhoto(cb?: () => void) {
+	return useMutation({
+		mutationFn: async ({
+			id,
+			data,
+		}: {
+			id: string
+			data: {
+				photo: FileList
+			}
+		}) => {
+			const formData = new FormData()
+			formData.append('image', data.photo.item(0)!)
+			const res = await userService.editUserPhoto(id, formData)
+			if (!res.data) Promise.reject()
+			return res
+		},
+		onSuccess: data => {
+			toast.success('Успешно!')
+			useAuthStore.setState({ user: data.data })
+			cb?.()
+		},
+	})
+}

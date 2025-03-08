@@ -14,6 +14,12 @@ class UserService {
 		return await api.put<IUser>(`/user/edit/${id}`, data)
 	}
 
+	async editUserPhoto(id: string, formData: FormData) {
+		return await api.put<IUser>(`/user/edit-photo/${id}`, formData, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		})
+	}
+
 	async getUser(id: string) {
 		return await api.get<IUser>(`/user/${id}`)
 	}
