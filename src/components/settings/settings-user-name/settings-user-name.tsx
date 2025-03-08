@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast'
 import { useAuthStore } from '../../../store/auth.store'
 import { SettingsEditUsername } from './settings-edit-username'
+import { Dialog } from '../../ui/dialog'
 
 export function SettingsUserName() {
 	const { user } = useAuthStore()
@@ -26,7 +27,9 @@ export function SettingsUserName() {
 							</button>
 						</th>
 						<th className='text-xs border-l'>
-							<SettingsEditUsername />
+							<Dialog title='Сменить логин' trigger={<button>Изменить</button>}>
+								<SettingsEditUsername />
+							</Dialog>
 						</th>
 					</tr>
 				</thead>

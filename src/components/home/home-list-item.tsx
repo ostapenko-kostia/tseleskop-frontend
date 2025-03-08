@@ -19,7 +19,7 @@ export function HomeListItem({ goal, index }: Props) {
 			<div className='w-12 aspect-square h-12 bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
 				{index}
 			</div>
-			<details className='w-full' name='item'>
+			<details className='w-full'>
 				<summary className='text-white px-2 py-0.5 text-lg appearance-none bg-[#27448D]'>
 					{goal.title}
 				</summary>
@@ -48,7 +48,7 @@ export function HomeListItem({ goal, index }: Props) {
 								<HomeSubGoal key={i} subGoal={subGoal} index={i + 1} />
 							))}
 						</div>
-						<EditIcon className='ml-auto mt-3' />
+						<EditIcon className='mr-auto mt-3' />
 					</div>
 				</div>
 			</details>

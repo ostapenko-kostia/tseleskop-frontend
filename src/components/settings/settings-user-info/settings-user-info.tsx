@@ -1,4 +1,5 @@
 import { useAuthStore } from '../../../store/auth.store'
+import { Dialog } from '../../ui/dialog'
 import { SettingsEditName } from './settings-edit-name'
 import { SettingsEditPin } from './settings-edit-pin'
 
@@ -16,10 +17,20 @@ export function SettingsUserInfo() {
 				</h2>
 				<ul className='text-sm flex items-center gap-4 max-[351px]:gap-2 max-[351px]:text-[13px]'>
 					<li>
-						<SettingsEditName />
+						<Dialog
+							title='Сменить Имя'
+							trigger={<button className='cursor-pointer'>Сменить Имя</button>}
+						>
+							<SettingsEditName />
+						</Dialog>
 					</li>
 					<li className='list-["|"] list-outside pl-2 max-[351px]:pl-1'>
-						<SettingsEditPin />
+						<Dialog
+							title='Сменить PIN'
+							trigger={<button className='cursor-pointer'>Сменить PIN</button>}
+						>
+							<SettingsEditPin />
+						</Dialog>
 					</li>
 				</ul>
 			</div>

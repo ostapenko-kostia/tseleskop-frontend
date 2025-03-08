@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import Switch from '../ui/switch'
 
 interface Props {
@@ -23,9 +24,9 @@ export function RegisterAgreements({
 					}}
 				/>
 				<div className='relative bg-white flex items-center justify-between rounded-md py-1.5 px-3'>
-					<a href='#' className='underline text-sm'>
+					<Link to='/personal-data-agreement' className='underline text-sm'>
 						Согласие на обработку персональных данных*
-					</a>
+					</Link>
 					<Switch
 						className='scale-120'
 						checked={personalDataAgreement}
@@ -41,9 +42,9 @@ export function RegisterAgreements({
 					}}
 				/>
 				<div className='relative bg-white flex items-center justify-between rounded-md py-1.5 px-3'>
-					<a href='#' className='underline text-sm'>
+					<Link to='/privacy-policy' className='underline text-sm'>
 						Политика конфиденциальности*
-					</a>
+					</Link>
 					<Switch
 						className='scale-120'
 						checked={privacyPolicyAgreement}

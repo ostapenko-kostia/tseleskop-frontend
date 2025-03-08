@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 import { HomeCreateGoal } from '../components/home/home-create-goal'
 import { HomeList } from '../components/home/home-list'
 import { HomeStatistics } from '../components/home/home-statistics'
-import { UserIcon } from '../components/icons/user-icon'
+import { SettingsIcon } from 'lucide-react'
 
 export function HomePage() {
 	return (
@@ -12,10 +12,10 @@ export function HomePage() {
 				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
 			}}
 		>
-			<div className='px-4 flex items-center justify-between gap-4 w-full'>
+			<div className='px-4 flex items-center justify-between gap-3 w-full'>
 				<HomeStatistics />
-				<Link to='/settings' className='flex flex-col gap-2 items-center'>
-					<UserIcon />
+				<Link to='/settings' className='flex flex-col gap-1 items-center'>
+					<SettingsIcon color='#27448D' size={48} />
 					<span>Настройки</span>
 				</Link>
 			</div>

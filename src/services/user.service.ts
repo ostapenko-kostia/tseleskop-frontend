@@ -13,6 +13,10 @@ class UserService {
 	) {
 		return await api.put<IUser>(`/user/edit/${id}`, data)
 	}
+
+	async getUser(id: string) {
+		return await api.get<IUser>(`/user/${id}`)
+	}
 }
 
 export const userService = new UserService()

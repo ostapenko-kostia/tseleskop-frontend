@@ -4,7 +4,7 @@ interface Props {
 	setPin: (pin: string) => void
 }
 
-export function RegisterPin({ setPin }: Props) {
+export function LoginPin({ setPin }: Props) {
 	return (
 		<div className='mt-12 px-3'>
 			<div
@@ -13,7 +13,7 @@ export function RegisterPin({ setPin }: Props) {
 					background: 'linear-gradient(90deg, #2F51A8 0%, #122042 100%)',
 				}}
 			>
-				Придумайте PIN
+				Введи PIN
 			</div>
 			<div className='relative p-[3px] rounded-xl'>
 				<div
