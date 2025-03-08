@@ -43,7 +43,7 @@ export function useEditUserPhoto(cb?: () => void) {
 			const formData = new FormData()
 			const file = data.photo.item(0)!
 
-			formData.append('image', file, 'photo.png')
+			formData.append('image', file)
 			const res = await userService.editUserPhoto(id, formData)
 			if (!res.data) Promise.reject()
 			return res
@@ -53,8 +53,5 @@ export function useEditUserPhoto(cb?: () => void) {
 			useAuthStore.setState({ user: data.data })
 			cb?.()
 		},
-		onError: error => {
-			alert(error)
-		}
 	})
 }
