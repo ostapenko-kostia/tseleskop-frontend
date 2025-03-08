@@ -40,7 +40,6 @@ export function SettingsEditPhoto() {
 						type='file'
 						id='file'
 						{...register('photo')}
-						accept='image/*'
 					/>
 				</label>
 				{watch('photo') && (
