@@ -8,12 +8,7 @@ export function HelloPage() {
 		navigate('/login')
 	}
 	return (
-		<section
-			className='h-full overflow-y-auto py-6 flex items-center'
-			style={{
-				background: 'linear-gradient(180deg, #FFFFFF 75%, #4982F6 100%)',
-			}}
-		>
+		<section className='overflow-y-auto py fixed top-1/2 -translate-y-1/2 flex items-center'>
 			<div>
 				<button onClick={handleClick}>
 					<img src='/logo.png' alt='Целескоп' className='w-1/2 mx-auto' />

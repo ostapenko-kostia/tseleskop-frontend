@@ -6,12 +6,7 @@ import { SettingsIcon } from 'lucide-react'
 
 export function HomePage() {
 	return (
-		<section
-			className='h-full overflow-y-auto'
-			style={{
-				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
-			}}
-		>
+		<section>
 			<div className='px-4 flex items-center justify-between gap-3 w-full'>
 				<HomeStatistics />
 				<Link to='/settings' className='flex flex-col gap-1 items-center'>

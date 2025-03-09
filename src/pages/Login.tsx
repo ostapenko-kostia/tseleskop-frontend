@@ -46,12 +46,7 @@ export function LoginPage() {
 	}
 
 	return !isLoading ? (
-		<section
-			className='h-full overflow-y-auto py-6'
-			style={{
-				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
-			}}
-		>
+		<section className='py-6'>
 			<LoginTitle />
 			<LoginUserInfo
 				photoUrl={user?.photoUrl ?? initData?.user?.photo_url}
@@ -72,7 +67,7 @@ export function LoginPage() {
 			</div>
 		</section>
 	) : (
-		<section className='h-full overflow-y-auto py-6 flex items-center justify-center flex-col gap-4'>
+		<section className='overflow-y-auto fixed top-1/2 -translate-y-1/2 flex items-center'>
 			<LoaderIcon className='animate-spin' />
 			<span>Загрузка...</span>
 		</section>

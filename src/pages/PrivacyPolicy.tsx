@@ -2,12 +2,7 @@ import { ArrowLeftCircleIcon } from 'lucide-react'
 
 export function PrivacyPolicyPage() {
 	return (
-		<section
-			className='h-full overflow-y-auto relative px-4 text-center py-10'
-			style={{
-				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
-			}}
-		>
+		<section className='relative px-4 text-center py-10'>
 			<header className='flex mb-5 flex-col gap-3'>
 				<button
 					onClick={() => window.history.back()}

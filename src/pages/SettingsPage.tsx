@@ -13,12 +13,7 @@ export function SettingsPage() {
 	const [customNotifies, setCustomNotifies] = useState(false)
 
 	return (
-		<section
-			className='h-full overflow-y-auto relative'
-			style={{
-				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
-			}}
-		>
+		<section className='relative'>
 			<Link to='/' className='absolute top-3 right-3'>
 				<HomeIcon />
 			</Link>
