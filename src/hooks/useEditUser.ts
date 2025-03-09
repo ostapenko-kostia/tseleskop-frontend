@@ -43,9 +43,8 @@ export function useEditUserPhoto(cb?: () => void) {
 			const formData = new FormData()
 			const file = data.photo.item(0)!
 
-			alert(file?.name)
-
 			formData.append('image', file)
+			alert(formData.get('image'))
 			const res = await userService.editUserPhoto(id, formData)
 			if (!res.data) Promise.reject()
 			return res
