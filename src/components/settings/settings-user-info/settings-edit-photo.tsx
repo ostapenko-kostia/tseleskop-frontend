@@ -42,7 +42,7 @@ export function SettingsEditPhoto() {
 			if (selectedFile.size > 5 * 1024 * 1024) {
 				toast.error('Файл очень большой, максимальный размер 5MB')
 				return
-			}''
+			}
 
 			const processedFile = await convertHeicToJpeg(selectedFile)
 			setFile(processedFile)
@@ -72,7 +72,7 @@ export function SettingsEditPhoto() {
 			toast.success('Успешно!')
 			useAuthStore.setState({ user: response.data })
 		} catch (error) {
-			console.error('Error uploading photo:', error)
+			toast.error(error as string)
 		} finally {
 			setIsPending(false)
 			setFile(null)
