@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router'
-import { useEditUserPhoto } from '../../../hooks/useEditUser'
 import { useAuthStore } from '../../../store/auth.store'
 import { Button } from '../../ui/button'
 import { DialogContext } from '../../ui/dialog'
-import { useForm } from 'react-hook-form'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { LoaderIcon } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { userService } from '../../../services/user.service'
 
 export function SettingsEditPhoto() {
 	const DialogContextValues = useContext(DialogContext)
@@ -14,22 +14,46 @@ export function SettingsEditPhoto() {
 	const { user } = useAuthStore()
 	const navigate = useNavigate()
 
-	const { register, handleSubmit, watch } = useForm<{
-		photo: FileList
-	}>()
+	const [file, setFile] = useState<File | null>()
+	const [isPending, setIsPending] = useState(false)
 
-	const { mutate: editUser, isPending } = useEditUserPhoto(closeDialog)
+	const handleFileSelection = (e: any) => {
+		const file = e.target?.files[0]
+		if (!file) return
+		setFile(file)
+	}
+
+	const handleSaveAvatar = async () => {
+		if (!file) {
+			toast.error('Выберите файл')
+			return
+		}
+
+		setIsPending(true)
+
+		const formData = new FormData()
+		formData.append('image', file, 'avatar.png')
+
+		try {
+			const response = await userService.editUserPhoto(user!.id, formData)
+			console.log('Upload successful:', response.data)
+			toast.success('Успешно!')
+			useAuthStore.setState({ user: response.data })
+		} catch (error) {
+			console.error('Error uploading photo:', error)
+		} finally {
+			setIsPending(false)
+			setFile(null)
+			closeDialog()
+		}
+	}
 
 	useEffect(() => {
 		if (!user) navigate('/register')
 	}, [user])
 
 	return (
-		<form
-			action='#'
-			className='w-full flex flex-col gap-4'
-			onSubmit={handleSubmit(data => editUser({ id: user!.id, data }))}
-		>
+		<div className='w-full flex flex-col gap-4'>
 			<div className='flex flex-col'>
 				<label htmlFor='file' className='mb-2 opacity-80 font-medium'>
 					Загрузите фото
@@ -40,20 +64,24 @@ export function SettingsEditPhoto() {
 						className='hidden'
 						type='file'
 						id='file'
-						accept="image/jpeg, image/png, image/heif, image/heic"
-						{...register('photo')}
+						onChange={handleFileSelection}
+						accept='.png, .jpg'
 					/>
 				</label>
-				{watch('photo') && (
+				{file && (
 					<div className='flex flex-col gap-2'>
-						<span>- {watch('photo')[0].name}</span>
+						<span>- {file.name}</span>
 					</div>
 				)}
 			</div>
-			<Button disabled={isPending} className='w-2/3 mx-auto'>
+			<Button
+				onClick={handleSaveAvatar}
+				disabled={isPending}
+				className='w-2/3 mx-auto'
+			>
 				{isPending && <LoaderIcon className='animate-spin' />}
 				{isPending ? 'Подождите...' : 'Сменить'}
 			</Button>
-		</form>
+		</div>
 	)
 }
