@@ -9,7 +9,7 @@ export function HelloPage() {
 	}
 	return (
 		<section
-			className='h-screen overflow-y-auto py-6 flex items-center'
+			className='h-full overflow-y-auto py-6 flex items-center'
 			style={{
 				background: 'linear-gradient(180deg, #FFFFFF 75%, #4982F6 100%)',
 			}}

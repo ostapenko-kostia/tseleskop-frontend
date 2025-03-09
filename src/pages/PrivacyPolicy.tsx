@@ -3,7 +3,7 @@ import { ArrowLeftCircleIcon } from 'lucide-react'
 export function PrivacyPolicyPage() {
 	return (
 		<section
-			className='h-screen overflow-y-auto relative px-4 text-center py-10'
+			className='h-full overflow-y-auto relative px-4 text-center py-10'
 			style={{
 				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
 			}}

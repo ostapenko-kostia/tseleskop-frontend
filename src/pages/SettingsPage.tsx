@@ -14,7 +14,7 @@ export function SettingsPage() {
 
 	return (
 		<section
-			className='h-screen overflow-y-auto relative'
+			className='h-full overflow-y-auto relative'
 			style={{
 				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
 			}}

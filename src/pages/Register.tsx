@@ -52,7 +52,7 @@ export function RegisterPage() {
 
 	return !isLoading ? (
 		<section
-			className='h-screen overflow-y-auto py-6'
+			className='h-full overflow-y-auto py-6'
 			style={{
 				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
 			}}
@@ -84,7 +84,7 @@ export function RegisterPage() {
 			</div>
 		</section>
 	) : (
-		<section className='h-screen overflow-y-auto py-6 flex items-center justify-center flex-col gap-4'>
+		<section className='h-full overflow-y-auto py-6 flex items-center justify-center flex-col gap-4'>
 			<LoaderIcon className='animate-spin' />
 			<span>Загрузка...</span>
 		</section>

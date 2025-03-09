@@ -103,10 +103,10 @@ export function SettingsEditPhoto() {
 						<AvatarEditor
 							ref={editorRef}
 							image={file}
-							width={250}
-							height={250}
-							border={50}
-							borderRadius={125}
+							width={150}
+							height={150}
+							border={25}
+							borderRadius={150}
 							color={[255, 255, 255, 0.6]}
 							scale={1.2}
 							rotate={0}
