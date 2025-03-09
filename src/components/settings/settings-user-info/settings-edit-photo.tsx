@@ -5,6 +5,7 @@ import { Button } from '../../ui/button'
 import { DialogContext } from '../../ui/dialog'
 import { useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react'
+import { LoaderIcon } from 'lucide-react'
 
 export function SettingsEditPhoto() {
 	const DialogContextValues = useContext(DialogContext)
@@ -49,7 +50,8 @@ export function SettingsEditPhoto() {
 				)}
 			</div>
 			<Button disabled={isPending} className='w-2/3 mx-auto'>
-				Сменить
+				{isPending && <LoaderIcon className='animate-spin' />}
+				{isPending ? 'Подождите...' : 'Сменить'}
 			</Button>
 		</form>
 	)
