@@ -8,7 +8,8 @@
 
 body {
 	font-family: 'Inter', sans-serif;
-	background: linear-gradient(180deg, #FFFFFF 75%, #4982F6 100%) no-repeat center center fixed;
+	background: linear-gradient(180deg, #ffffff 75%, #4982f6 100%) no-repeat
+		center center fixed;
 }
 
 .checkbox {

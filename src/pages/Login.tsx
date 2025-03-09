@@ -67,7 +67,7 @@ export function LoginPage() {
 			</div>
 		</section>
 	) : (
-		<section className='overflow-y-auto fixed top-1/2 -translate-y-1/2 flex items-center'>
+		<section className='overflow-y-auto fixed top-1/2 gap-2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center'>
 			<LoaderIcon className='animate-spin' />
 			<span>Загрузка...</span>
 		</section>
