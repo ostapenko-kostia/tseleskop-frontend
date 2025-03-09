@@ -40,6 +40,7 @@ export function SettingsEditPhoto() {
 						className='hidden'
 						type='file'
 						id='file'
+						accept="image/jpeg, image/png, image/heif, image/heic"
 						{...register('photo')}
 					/>
 				</label>
