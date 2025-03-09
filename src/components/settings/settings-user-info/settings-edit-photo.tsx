@@ -1,11 +1,11 @@
+import { LoaderIcon } from 'lucide-react'
+import { useContext, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router'
+import { userService } from '../../../services/user.service'
 import { useAuthStore } from '../../../store/auth.store'
 import { Button } from '../../ui/button'
 import { DialogContext } from '../../ui/dialog'
-import { useContext, useEffect, useState } from 'react'
-import { LoaderIcon } from 'lucide-react'
-import toast from 'react-hot-toast'
-import { userService } from '../../../services/user.service'
 
 export function SettingsEditPhoto() {
 	const DialogContextValues = useContext(DialogContext)
@@ -17,10 +17,39 @@ export function SettingsEditPhoto() {
 	const [file, setFile] = useState<File | null>()
 	const [isPending, setIsPending] = useState(false)
 
-	const handleFileSelection = (e: any) => {
-		const file = e.target?.files[0]
-		if (!file) return
-		setFile(file)
+	const convertHeicToJpeg = async (file: File): Promise<File> => {
+		if (file.type === 'image/heic' || file.type === 'image/heif') {
+			try {
+				return new File([file], file.name.replace(/\.(heic|HEIC)$/, '.jpg'), {
+					type: 'image/jpeg',
+				})
+			} catch (error) {
+				console.error('Error converting HEIC:', error)
+				throw error
+			}
+		}
+		return file
+	}
+
+	const handleFileSelection = async (e: any) => {
+		const selectedFile = e.target?.files[0]
+		if (!selectedFile) return
+
+		try {
+			console.log('Selected file type:', selectedFile.type)
+			console.log('Selected file name:', selectedFile.name)
+
+			if (selectedFile.size > 5 * 1024 * 1024) {
+				toast.error('Файл очень большой, максимальный размер 5MB')
+				return
+			}''
+
+			const processedFile = await convertHeicToJpeg(selectedFile)
+			setFile(processedFile)
+		} catch (error) {
+			console.error('Error processing file:', error)
+			toast.error('Ошибка обработки файла')
+		}
 	}
 
 	const handleSaveAvatar = async () => {
@@ -31,10 +60,13 @@ export function SettingsEditPhoto() {
 
 		setIsPending(true)
 
-		const formData = new FormData()
-		formData.append('image', file, 'avatar.png')
-
 		try {
+			console.log('Uploading file type:', file.type)
+			console.log('Uploading file name:', file.name)
+
+			const formData = new FormData()
+			formData.append('image', file, `avatar.${file.name.split('.').pop()}`)
+
 			const response = await userService.editUserPhoto(user!.id, formData)
 			console.log('Upload successful:', response.data)
 			toast.success('Успешно!')
@@ -65,7 +97,7 @@ export function SettingsEditPhoto() {
 						type='file'
 						id='file'
 						onChange={handleFileSelection}
-						accept='.png, .jpg'
+						accept='image/*,.png,.jpg,.jpeg,.heic'
 					/>
 				</label>
 				{file && (
