@@ -5,7 +5,7 @@ export function HelloPage() {
 
 	const handleClick = () => {
 		sessionStorage.setItem('helloShown', 'true')
-		navigate('/')
+		navigate('/login')
 	}
 	return (
 		<section

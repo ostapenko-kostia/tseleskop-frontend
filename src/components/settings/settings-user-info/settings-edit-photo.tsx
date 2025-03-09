@@ -1,5 +1,6 @@
 import { LoaderIcon } from 'lucide-react'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import AvatarEditor from 'react-avatar-editor'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router'
 import { userService } from '../../../services/user.service'
@@ -10,26 +11,13 @@ import { DialogContext } from '../../ui/dialog'
 export function SettingsEditPhoto() {
 	const DialogContextValues = useContext(DialogContext)
 	const closeDialog = () => DialogContextValues?.closeDialog()
+	const editorRef = useRef<AvatarEditor>(null)
 
 	const { user } = useAuthStore()
 	const navigate = useNavigate()
 
 	const [file, setFile] = useState<File | null>()
 	const [isPending, setIsPending] = useState(false)
-
-	const convertHeicToJpeg = async (file: File): Promise<File> => {
-		if (file.type === 'image/heic' || file.type === 'image/heif') {
-			try {
-				return new File([file], file.name.replace(/\.(heic|HEIC)$/, '.jpg'), {
-					type: 'image/jpeg',
-				})
-			} catch (error) {
-				console.error('Error converting HEIC:', error)
-				throw error
-			}
-		}
-		return file
-	}
 
 	const handleFileSelection = async (e: any) => {
 		const selectedFile = e.target?.files[0]
@@ -44,8 +32,7 @@ export function SettingsEditPhoto() {
 				return
 			}
 
-			const processedFile = await convertHeicToJpeg(selectedFile)
-			setFile(processedFile)
+			setFile(selectedFile)
 		} catch (error) {
 			console.error('Error processing file:', error)
 			toast.error('Ошибка обработки файла')
@@ -53,30 +40,41 @@ export function SettingsEditPhoto() {
 	}
 
 	const handleSaveAvatar = async () => {
-		if (!file) {
-			toast.error('Выберите файл')
+		if (!file || !editorRef.current) {
+			toast.error('Выберите файл')
 			return
 		}
 
 		setIsPending(true)
 
 		try {
-			console.log('Uploading file type:', file.type)
-			console.log('Uploading file name:', file.name)
+			const canvas = editorRef.current.getImageScaledToCanvas()
+			canvas.toBlob(async blob => {
+				if (!blob) {
+					toast.error('Ошибка обработки изображения')
+					return
+				}
 
-			const formData = new FormData()
-			formData.append('image', file, `avatar.${file.name.split('.').pop()}`)
+				const formData = new FormData()
+				formData.append('image', blob, 'avatar.png')
 
-			const response = await userService.editUserPhoto(user!.id, formData)
-			console.log('Upload successful:', response.data)
-			toast.success('Успешно!')
-			useAuthStore.setState({ user: response.data })
+				try {
+					const response = await userService.editUserPhoto(user!.id, formData)
+					toast.success('Успешно!')
+					useAuthStore.setState({ user: response.data })
+				} catch (error) {
+					console.error('Error uploading photo:', error)
+					toast.error('Ошибка загрузки фото')
+				} finally {
+					setIsPending(false)
+					setFile(null)
+					closeDialog()
+				}
+			}, 'image/png')
 		} catch (error) {
-			toast.error(error as string)
-		} finally {
+			console.error('Error processing image:', error)
+			toast.error('Ошибка обработки изображения')
 			setIsPending(false)
-			setFile(null)
-			closeDialog()
 		}
 	}
 
@@ -91,7 +89,7 @@ export function SettingsEditPhoto() {
 					Загрузите фото
 				</label>
 				<label className='w-min text-nowrap appearance-none rounded-md border border-[#ccc] bg-white text-[#333] placeholder:text-[#808080] px-7 cursor-pointer py-3 text-sm focus:z-10 focus:bg-indigo-500 focus:outline-none focus:ring-indigo-500;'>
-					Выберите файл
+					Выберите файл
 					<input
 						className='hidden'
 						type='file'
@@ -101,8 +99,18 @@ export function SettingsEditPhoto() {
 					/>
 				</label>
 				{file && (
-					<div className='flex flex-col gap-2'>
-						<span>- {file.name}</span>
+					<div className='flex flex-col gap-2 items-center mt-4'>
+						<AvatarEditor
+							ref={editorRef}
+							image={file}
+							width={250}
+							height={250}
+							border={50}
+							borderRadius={125}
+							color={[255, 255, 255, 0.6]}
+							scale={1.2}
+							rotate={0}
+						/>
 					</div>
 				)}
 			</div>

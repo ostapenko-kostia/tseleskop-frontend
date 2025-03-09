@@ -11,6 +11,7 @@ import { useAuth } from '../hooks/useAuth'
 import { useNavigate } from 'react-router'
 import { useInitData } from '../hooks/useInitData'
 import { userService } from '../services/user.service'
+import { LoaderIcon } from 'lucide-react'
 
 export function RegisterPage() {
 	const navigate = useNavigate()
@@ -49,7 +50,7 @@ export function RegisterPage() {
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
-	return !isLoading && (
+	return !isLoading ? (
 		<section
 			className='h-screen overflow-y-auto py-6'
 			style={{
@@ -81,6 +82,11 @@ export function RegisterPage() {
 					Далее
 				</Button>
 			</div>
+		</section>
+	) : (
+		<section className='h-screen overflow-y-auto py-6 flex items-center justify-center flex-col gap-4'>
+			<LoaderIcon className='animate-spin' />
+			<span>Загрузка...</span>
 		</section>
 	)
 }

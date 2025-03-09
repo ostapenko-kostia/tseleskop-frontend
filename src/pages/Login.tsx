@@ -11,6 +11,7 @@ import {
 import { useInitData } from '../hooks/useInitData'
 import { userService } from '../services/user.service'
 import { IUser } from '../types/user'
+import { LoaderIcon } from 'lucide-react'
 
 export function LoginPage() {
 	const navigate = useNavigate()
@@ -44,33 +45,36 @@ export function LoginPage() {
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
-	return (
-		!isLoading && (
-			<section
-				className='h-screen overflow-y-auto py-6'
-				style={{
-					background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
-				}}
-			>
-				<LoginTitle />
-				<LoginUserInfo
-					photoUrl={user?.photoUrl ?? initData?.user?.photo_url}
-					firstName={user?.firstName ?? initData?.user?.first_name}
-					lastName={user?.lastName ?? initData?.user?.last_name}
-				/>
-				<LoginUsername userName={user?.username ?? initData?.user?.username} />
-				<LoginPin setPin={setPin} />
+	return !isLoading ? (
+		<section
+			className='h-screen overflow-y-auto py-6'
+			style={{
+				background: 'linear-gradient(180deg, #FFFFFF 65.62%, #4982F6 100%)',
+			}}
+		>
+			<LoginTitle />
+			<LoginUserInfo
+				photoUrl={user?.photoUrl ?? initData?.user?.photo_url}
+				firstName={user?.firstName ?? initData?.user?.first_name}
+				lastName={user?.lastName ?? initData?.user?.last_name}
+			/>
+			<LoginUsername userName={user?.username ?? initData?.user?.username} />
+			<LoginPin setPin={setPin} />
 
-				<div className='flex w-full justify-center'>
-					<Button
-						onClick={auth}
-						className='mt-10'
-						disabled={pin.trim().length !== 4 || isPending}
-					>
-						Далее
-					</Button>
-				</div>
-			</section>
-		)
+			<div className='flex w-full justify-center'>
+				<Button
+					onClick={auth}
+					className='mt-10'
+					disabled={pin.trim().length !== 4 || isPending}
+				>
+					Далее
+				</Button>
+			</div>
+		</section>
+	) : (
+		<section className='h-screen overflow-y-auto py-6 flex items-center justify-center flex-col gap-4'>
+			<LoaderIcon className='animate-spin' />
+			<span>Загрузка...</span>
+		</section>
 	)
 }
