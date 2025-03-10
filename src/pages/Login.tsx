@@ -46,7 +46,7 @@ export function LoginPage() {
 	}
 
 	return !isLoading ? (
-		<section className='pt-6 overflow-y-hidden'>
+		<section className='pt-6 overflow-y-hidden min-h-screen'>
 			<LoginTitle />
 			<LoginUserInfo
 				photoUrl={user?.photoUrl ?? initData?.user?.photo_url}

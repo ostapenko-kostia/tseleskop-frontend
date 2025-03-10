@@ -51,7 +51,7 @@ export function RegisterPage() {
 	}
 
 	return !isLoading ? (
-		<section className='pt-6 overflow-y-hidden'>
+		<section className='pt-6 overflow-y-hidden min-h-screen'>
 			<RegisterTitle />
 			<RegisterUserInfo user={initData?.user} />
 			<RegisterUsername user={initData?.user} />
