@@ -42,7 +42,7 @@ export function LoginPage() {
 	)
 
 	const auth = () => {
-		window.scroll({ top: 0 })
+		alert(window.scrollY)
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
