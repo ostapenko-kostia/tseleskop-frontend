@@ -11,16 +11,14 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	min-height: 100%;
 	height: 100%;
 	overflow: hidden;
-	position: fixed;
 }
 
 #root {
 	height: 100%;
 	overflow-y: auto;
-	position: relative;
+	-webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -31,6 +29,17 @@ body {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+	min-height: fill-available;
+	min-height: -webkit-fill-available;
+}
+
+@supports (-webkit-touch-callout: none) {
+	body {
+		height: -webkit-fill-available;
+	}
+	#root {
+		height: -webkit-fill-available;
+	}
 }
 
 .checkbox {
