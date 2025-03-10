@@ -11,10 +11,13 @@ export function SettingsUserInfo() {
 			<Dialog
 				title='Сменить Фото'
 				trigger={
-					<img
-						className='w-[80px] h-[80px] max-[390px]:w-[70px] max-[390px]:h-[70px] aspect-square rounded-full'
-						src={user?.photoUrl}
-					/>
+					<div className='flex items-center flex-col gap-1 translate-y-3'>
+						<img
+							className='w-[80px] h-[80px] max-[390px]:w-[70px] max-[390px]:h-[70px] aspect-square rounded-full'
+							src={user?.photoUrl}
+						/>
+						<span className='text-sm'>Сменить фото</span>
+					</div>
 				}
 			>
 				<SettingsEditPhoto />
@@ -28,9 +31,7 @@ export function SettingsUserInfo() {
 					<li>
 						<Dialog
 							title='Сменить Имя'
-							trigger={
-								<button className='cursor-pointer'>Сменить Имя</button>
-							}
+							trigger={<button className='cursor-pointer'>Сменить Имя</button>}
 						>
 							<SettingsEditName />
 						</Dialog>
@@ -38,9 +39,7 @@ export function SettingsUserInfo() {
 					<li className='list-["|"] list-outside pl-2 max-[351px]:pl-1'>
 						<Dialog
 							title='Сменить PIN'
-							trigger={
-								<button className='cursor-pointer'>Сменить PIN</button>
-							}
+							trigger={<button className='cursor-pointer'>Сменить PIN</button>}
 						>
 							<SettingsEditPin />
 						</Dialog>
