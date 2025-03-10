@@ -42,6 +42,7 @@ export function LoginPage() {
 	)
 
 	const auth = () => {
+		window.scrollTo(0, 0)
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
