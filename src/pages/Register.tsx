@@ -47,7 +47,7 @@ export function RegisterPage() {
 	)
 
 	const auth = () => {
-		window.scroll({ top: 0 })
+		window.scrollTo(0, 0)
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
