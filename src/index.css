@@ -2,48 +2,17 @@
 
 @import 'tailwindcss';
 
-* {
-	box-sizing: border-box;
-}
-
-html {
-	height: 100%;
-}
-
 body {
 	font-family: 'Inter', sans-serif;
 	background: linear-gradient(180deg, #ffffff 75%, #4982f6 100%) no-repeat
-		center center fixed;
+		center fixed;
 	background-size: cover;
 	height: 100%;
-	overflow: hidden;
 }
 
 #root {
 	height: 100%;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
-}
-
-.tg-app {
-	min-height: 100vh;
-	min-height: calc(var(--tg-viewport-height, 100vh));
-	position: relative;
-}
-
-@media (max-height: 100vh) {
-	#root {
-		position: absolute;
-	}
-}
-
-@supports (-webkit-touch-callout: none) {
-	body {
-		height: -webkit-fill-available;
-	}
-	#root {
-		height: -webkit-fill-available;
-	}
+	width: 100%;
 }
 
 .checkbox {
