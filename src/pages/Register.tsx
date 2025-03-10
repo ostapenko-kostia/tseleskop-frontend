@@ -51,7 +51,7 @@ export function RegisterPage() {
 	}
 
 	return !isLoading ? (
-		<section className='py-6'>
+		<section className='pt-6'>
 			<RegisterTitle />
 			<RegisterUserInfo user={initData?.user} />
 			<RegisterUsername user={initData?.user} />
@@ -79,7 +79,7 @@ export function RegisterPage() {
 			</div>
 		</section>
 	) : (
-		<section className='overflow-y-auto fixed flex items-center gap-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+		<section className='overflow-y-hidden fixed flex items-center gap-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
 			<LoaderIcon className='animate-spin' />
 			<span>Загрузка...</span>
 		</section>

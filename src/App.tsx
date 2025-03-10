@@ -10,7 +10,7 @@ import { PersonalDataAgreementPage } from './pages/PersonalDataAgreement'
 import { HelloPage } from './pages/HelloPage'
 import { LoginPage } from './pages/Login'
 
-const PAGES_WITHOUT_AUTH = ['/register', '/hello', '/login']
+const PAGES_WITHOUT_AUTH = ['/register', '/hello', '/login', '/privacy-policy', '/personal-data-agreement']
 
 function App() {
 	const { isAuth } = useAuthStore()
@@ -18,9 +18,10 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		console.log(location.pathname)
 		if (!isAuth && !PAGES_WITHOUT_AUTH.includes(location.pathname))
 			navigate('/register')
-	}, [isAuth, window.location.href])
+	}, [isAuth, location.pathname])
 
 	useEffect(() => {
 		if (sessionStorage.getItem('helloShown') !== 'true') navigate('/hello')

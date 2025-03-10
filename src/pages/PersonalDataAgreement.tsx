@@ -2,7 +2,7 @@ import { ArrowLeftCircleIcon } from 'lucide-react'
 
 export function PersonalDataAgreementPage() {
 	return (
-		<section className='relative px-4 text-center py-10'>
+		<section className='relative px-4 text-center pt-10'>
 			<header className='flex mb-5 flex-col gap-3'>
 				<button
 					onClick={() => window.history.back()}
@@ -87,18 +87,9 @@ export function PersonalDataAgreementPage() {
 						свяжитесь с нами через контактную форму на сайте.
 					</p>
 				</section>
-
-				<section className='mt-5'>
-					<button
-						onClick={() => alert('Согласие принято!')}
-						className='px-4 py-2 bg-blue-600 text-white rounded'
-					>
-						Принять согласие
-					</button>
-				</section>
 			</main>
 
-			<footer>
+			<footer className='text-center mt-5'>
 				<p>&copy; Все права защищены.</p>
 			</footer>
 		</section>

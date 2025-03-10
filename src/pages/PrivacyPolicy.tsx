@@ -2,7 +2,7 @@ import { ArrowLeftCircleIcon } from 'lucide-react'
 
 export function PrivacyPolicyPage() {
 	return (
-		<section className='relative px-4 text-center py-10'>
+		<section className='relative px-4 text-center pt-10'>
 			<header className='flex mb-5 flex-col gap-3'>
 				<button
 					onClick={() => window.history.back()}

@@ -120,7 +120,7 @@ export function SettingsEditPhoto() {
 				className='w-2/3 mx-auto'
 			>
 				{isPending && <LoaderIcon className='animate-spin' />}
-				{isPending ? 'Подождите...' : 'Сменить'}
+				{isPending ? 'Подождите...' : 'Сменить фото'}
 			</Button>
 		</div>
 	)
