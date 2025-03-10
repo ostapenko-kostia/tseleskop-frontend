@@ -10,12 +10,32 @@ import { PersonalDataAgreementPage } from './pages/PersonalDataAgreement'
 import { HelloPage } from './pages/HelloPage'
 import { LoginPage } from './pages/Login'
 
-const PAGES_WITHOUT_AUTH = ['/register', '/hello', '/login', '/privacy-policy', '/personal-data-agreement']
+const PAGES_WITHOUT_AUTH = [
+	'/register',
+	'/hello',
+	'/login',
+	'/privacy-policy',
+	'/personal-data-agreement',
+]
 
 function App() {
 	const { isAuth } = useAuthStore()
 	const location = useLocation()
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		const updateViewportHeight = () => {
+			const vh = window.innerHeight * 0.01
+			document.documentElement.style.setProperty('--vh', `${vh}px`)
+		}
+
+		updateViewportHeight()
+		window.addEventListener('resize', updateViewportHeight)
+
+		return () => {
+			window.removeEventListener('resize', updateViewportHeight)
+		}
+	}, [])
 
 	useEffect(() => {
 		console.log(location.pathname)
