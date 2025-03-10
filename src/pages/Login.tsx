@@ -12,6 +12,7 @@ import { useInitData } from '../hooks/useInitData'
 import { userService } from '../services/user.service'
 import { IUser } from '../types/user'
 import { LoaderIcon } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 export function LoginPage() {
 	const navigate = useNavigate()
@@ -42,7 +43,7 @@ export function LoginPage() {
 	)
 
 	const auth = () => {
-		alert(window.scrollY)
+		toast(window.scrollY.toString())
 		if (initData && pin.length === 4) mutate({ initData, pin })
 	}
 
