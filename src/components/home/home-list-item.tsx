@@ -7,13 +7,13 @@ interface Props {
 	index: number
 }
 
-export function HomeListItem({ goal, index }: Props) {
-	const urgencyColors = {
-		low: '#F9F924',
-		average: '#FA8E00',
-		high: '#C61515',
-	}
+export const URGENCY_COLORS = {
+	low: '#F9F924',
+	average: '#FA8E00',
+	high: '#C61515',
+}
 
+export function HomeListItem({ goal, index }: Props) {
 	return (
 		<article className='flex items-start w-full'>
 			<div className='w-12 aspect-square h-12 bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
@@ -53,9 +53,9 @@ export function HomeListItem({ goal, index }: Props) {
 				</div>
 			</details>
 			<div
-				className='w-14 h-[32px]'
+				className='w-14 mr-8 h-[32px]'
 				style={{
-					backgroundColor: urgencyColors[goal.urgency],
+					backgroundColor: URGENCY_COLORS[goal.urgency],
 				}}
 			/>
 		</article>

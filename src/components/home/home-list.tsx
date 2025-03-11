@@ -1,8 +1,15 @@
 import { useState } from 'react'
-import { HomeListItem } from './home-list-item'
+import { HomeListItem, URGENCY_COLORS } from './home-list-item'
 import { Goal } from '../../types/goal'
+import { MenuIcon } from 'lucide-react'
+import Popup from 'reactjs-popup'
+import 'reactjs-popup/dist/index.css'
+import clsx from 'clsx'
 
 export function HomeList() {
+	const [urgencyLevel, setUrgencyLevel] = useState<
+		'all' | 'low' | 'average' | 'high'
+	>('all')
 	const [goals] = useState<Goal[]>([
 		{
 			id: 1,
@@ -108,8 +115,8 @@ export function HomeList() {
 		},
 	])
 	return (
-		<section className='mt-8'>
-			<div className='relative w-full'>
+		<section className='pt-8'>
+			<div className='relative w-full mb-10'>
 				<h2 className='font-bold text-xl uppercase absolute left-1/2 top-1/2 -translate-y-1/2 bg-white z-10 px-3 text-nowrap -translate-x-1/2'>
 					Перечень целей
 				</h2>
@@ -121,10 +128,80 @@ export function HomeList() {
 				/>
 			</div>
 
-			<div className='pt-10'>
-				{goals.map((goal, index) => (
-					<HomeListItem goal={goal} key={index} index={index + 1} />
-				))}
+			<div className='flex items-center w-full h-8'>
+				<div
+					className='w-12 text-xl h-full text-center text-white'
+					style={{
+						background: 'linear-gradient(180deg, #2F51A8 0%, #122042 100%)',
+					}}
+				>
+					№
+				</div>
+				<div className='border-t-2 w-full border-[#2F51A8] h-full pl-3 flex items-center'>
+					Название и описание целей
+				</div>
+				<Popup
+					position='bottom center'
+					contentStyle={{
+						border: '2px solid #2F51A8',
+						borderEndEndRadius: '10px',
+						borderEndStartRadius: '10px',
+						width: '80px',
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						gap: '5px',
+					}}
+					arrow={false}
+					trigger={
+						<div
+							className='w-24 h-full text-xl relative text-white flex items-center p-1'
+							style={{
+								background: 'linear-gradient(180deg, #2F51A8 0%, #122042 100%)',
+							}}
+						>
+							lvl <MenuIcon className='absolute right-0.5 top-0.5' size={16} />
+						</div>
+					}
+				>
+					<button
+						onClick={() =>
+							setUrgencyLevel(prev => (prev === 'low' ? 'all' : 'low'))
+						}
+						className={clsx('w-8 aspect-square rounded-full', {
+							'border-2 border-[#2F51A8]': urgencyLevel === 'low',
+						})}
+						style={{ backgroundColor: URGENCY_COLORS['low'] }}
+					/>
+					<button
+						onClick={() =>
+							setUrgencyLevel(prev => (prev === 'average' ? 'all' : 'average'))
+						}
+						className={clsx('w-8 aspect-square rounded-full', {
+							'border-2 border-[#2F51A8]': urgencyLevel === 'average',
+						})}
+						style={{ backgroundColor: URGENCY_COLORS['average'] }}
+					/>
+					<button
+						onClick={() =>
+							setUrgencyLevel(prev => (prev === 'high' ? 'all' : 'high'))
+						}
+						className={clsx('w-8 aspect-square rounded-full', {
+							'border-2 border-[#2F51A8]': urgencyLevel === 'high',
+						})}
+						style={{ backgroundColor: URGENCY_COLORS['high'] }}
+					/>
+				</Popup>
+			</div>
+
+			<div>
+				{goals
+					.filter(
+						goal => urgencyLevel === 'all' || goal.urgency === urgencyLevel
+					)
+					.map((goal, index) => (
+						<HomeListItem goal={goal} key={index} index={index + 1} />
+					))}
 			</div>
 		</section>
 	)
