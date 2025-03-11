@@ -137,7 +137,7 @@ export function HomeList() {
 				>
 					№
 				</div>
-				<div className='border-t-2 w-full border-[#2F51A8] h-full pl-3 flex items-center'>
+				<div className='border-t-2 w-full border-[#2F51A8] h-full pl-3 flex items-center max-[340px]:text-sm'>
 					Название и описание целей
 				</div>
 				<Popup
@@ -146,7 +146,7 @@ export function HomeList() {
 						border: '2px solid #2F51A8',
 						borderEndEndRadius: '10px',
 						borderEndStartRadius: '10px',
-						width: '80px',
+						width: '55px',
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
@@ -155,7 +155,7 @@ export function HomeList() {
 					arrow={false}
 					trigger={
 						<div
-							className='w-24 h-full text-xl relative text-white flex items-center p-1'
+							className='w-16 h-full text-xl relative text-white flex items-center p-1'
 							style={{
 								background: 'linear-gradient(180deg, #2F51A8 0%, #122042 100%)',
 							}}
@@ -168,7 +168,7 @@ export function HomeList() {
 						onClick={() =>
 							setUrgencyLevel(prev => (prev === 'low' ? 'all' : 'low'))
 						}
-						className={clsx('w-8 aspect-square rounded-full', {
+						className={clsx('w-6 aspect-square rounded-full', {
 							'border-2 border-[#2F51A8]': urgencyLevel === 'low',
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['low'] }}
@@ -177,7 +177,7 @@ export function HomeList() {
 						onClick={() =>
 							setUrgencyLevel(prev => (prev === 'average' ? 'all' : 'average'))
 						}
-						className={clsx('w-8 aspect-square rounded-full', {
+						className={clsx('w-6 aspect-square rounded-full', {
 							'border-2 border-[#2F51A8]': urgencyLevel === 'average',
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['average'] }}
@@ -186,7 +186,7 @@ export function HomeList() {
 						onClick={() =>
 							setUrgencyLevel(prev => (prev === 'high' ? 'all' : 'high'))
 						}
-						className={clsx('w-8 aspect-square rounded-full', {
+						className={clsx('w-6 aspect-square rounded-full', {
 							'border-2 border-[#2F51A8]': urgencyLevel === 'high',
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['high'] }}

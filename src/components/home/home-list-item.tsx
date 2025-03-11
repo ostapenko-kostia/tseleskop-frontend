@@ -20,7 +20,7 @@ export function HomeListItem({ goal, index }: Props) {
 				{index}
 			</div>
 			<details className='w-full'>
-				<summary className='text-white px-2 py-0.5 text-lg appearance-none bg-[#27448D]'>
+				<summary className='text-white px-2 h-8 flex items-center py-0.5 text-lg appearance-none bg-[#27448D] max-[370px]:text-sm'>
 					{goal.title}
 				</summary>
 				<div className='relative p-[3px] rounded-xl'>
@@ -53,7 +53,7 @@ export function HomeListItem({ goal, index }: Props) {
 				</div>
 			</details>
 			<div
-				className='w-14 mr-8 h-[32px]'
+				className='w-14 mr-2 h-[32px]'
 				style={{
 					backgroundColor: URGENCY_COLORS[goal.urgency],
 				}}
