@@ -1,39 +1,33 @@
-import { Cell, Pie, PieChart } from 'recharts'
-import { URGENCY_COLORS } from './home-list-item'
+import {
+	Bar,
+	BarChart,
+	Line,
+	LineChart,
+	ResponsiveContainer,
+	XAxis,
+	YAxis,
+} from 'recharts'
 
-const pieChartData = [
-	{ name: 'low', value: 5 },
-	{ name: 'average', value: 3 },
-	{ name: 'high', value: 2 },
+const barChartData = [
+	{ name: '1 Цель', percent: 60 },
+	{ name: '2 Цель', percent: 90 },
+	{ name: '3 Цель', percent: 40 },
 ]
 
-const RADIAN = Math.PI / 180
-const renderCustomizedLabel = ({
-	cx,
-	cy,
-	midAngle,
-	innerRadius,
-	outerRadius,
-	index,
-}: any) => {
-	const radius = innerRadius + (outerRadius - innerRadius) * 0.5
-	const x = cx + radius * Math.cos(-midAngle * RADIAN)
-	const y = cy + radius * Math.sin(-midAngle * RADIAN)
-
-	return (
-		<text
-			x={x}
-			y={y}
-			fill='black'
-			fontSize={12}
-			fontWeight={500}
-			textAnchor={x > cx ? 'start' : 'end'}
-			dominantBaseline='central'
-		>
-			{pieChartData[index].value}
-		</text>
-	)
-}
+const lineChartData = [
+	{ name: 'Янв.', goals: 3 },
+	{ name: 'Фев.', goals: 1 },
+	{ name: 'Март', goals: 8 },
+	{ name: 'Апр.', goals: 4 },
+	{ name: 'Май', goals: 12 },
+	{ name: 'Июнь', goals: 15 },
+	{ name: 'Июль', goals: 10 },
+	{ name: 'Авг.', goals: 4 },
+	{ name: 'Сент.', goals: 1 },
+	{ name: 'Окт.', goals: 0 },
+	{ name: 'Нояб.', goals: 2 },
+	{ name: 'Дек.', goals: 15 },
+]
 
 export function HomeStatistics() {
 	return (
@@ -47,63 +41,48 @@ export function HomeStatistics() {
 					}}
 				/>
 				<div className='relative bg-white grid grid-cols-1 grid-rows-2 rounded-md'>
-					<div className='border-b-2 border-[#2F51A8] flex items-center justify-center px-3 py-7'>
-						<span className='text-lg font-normal text-nowrap'>
-							Всего целей: <span className='font-bold'>100</span>
-						</span>
+					<div className='border-b-2 border-[#2F51A8] flex flex-col pt-2 px-2'>
+						<div className='w-full flex items-center justify-between max-[380px]:flex-col mb-5'>
+							<span className='text-lg font-normal text-nowrap max-[520px]:text-sm max-[440px]:text-xs'>
+								Всего целей: <span className='font-bold'>100</span>
+							</span>
+							<span className='text-lg font-normal text-nowrap max-[520px]:text-sm max-[440px]:text-xs'>
+								Прогрес целей | <span className='font-bold'>ТОП 10</span>
+							</span>
+						</div>
+						<ResponsiveContainer height={120}>
+							<BarChart height={120} data={barChartData}>
+								<defs>
+									<linearGradient
+										id='gradient1'
+										x1='0%'
+										y1='0%'
+										x2='0%'
+										y2='100%'
+									>
+										<stop offset='0%' stopColor='#2F51A8' stopOpacity={1} />
+										<stop offset='100%' stopColor='#122042' stopOpacity={1} />
+									</linearGradient>
+								</defs>
+
+								<XAxis dataKey='name' fontSize={12} />
+								<YAxis dataKey='percent' fontSize={12} max={100} min={0} />
+								<Bar dataKey='percent' fill='url(#gradient1)' />
+							</BarChart>
+						</ResponsiveContainer>
 					</div>
 					<div className='relative flex flex-col p-2'>
 						<span className='font-normal text-sm text-nowrap'>
-							График важности целей:
+							Выполненые задачи:
 						</span>
-						<div className='w-full flex items-center justify-around h-[80px] px-5 mt-2 max-[400px]:justify-between max-[400px]:px-0'>
-							<PieChart width={100} height={100}>
-								<Pie
-									data={pieChartData}
-									outerRadius={40}
-									spacing={0}
-									rotate={-90}
-									dataKey='value'
-									labelLine={false}
-									label={renderCustomizedLabel}
-								>
-									{pieChartData.map((item, index) => (
-										<Cell
-											key={`cell-${index}`}
-											fill={
-												URGENCY_COLORS[
-													item.name.toLowerCase() as keyof typeof URGENCY_COLORS
-												]
-											}
-										>
-											{item.value}
-										</Cell>
-									))}
-								</Pie>
-							</PieChart>
-							<div className='flex flex-col items-start gap-3 font-normal text-xs'>
-								<div className='flex items-center gap-2'>
-									<div
-										className='w-5 h-3'
-										style={{ backgroundColor: URGENCY_COLORS['low'] }}
-									/>
-									<span>Желаемая</span>
-								</div>
-								<div className='flex items-center gap-2'>
-									<div
-										className='w-5 h-3'
-										style={{ backgroundColor: URGENCY_COLORS['average'] }}
-									/>
-									<span>Нужная</span>
-								</div>
-								<div className='flex items-center gap-2'>
-									<div
-										className='w-5 h-3'
-										style={{ backgroundColor: URGENCY_COLORS['high'] }}
-									/>
-									<span>Важная</span>
-								</div>
-							</div>
+						<div className='w-full'>
+							<ResponsiveContainer height={120} className='mt-4'>
+								<LineChart height={120} data={lineChartData}>
+									<XAxis dataKey='name' fontSize={10} />
+									<YAxis dataKey='goals' fontSize={12} />
+									<Line dataKey='goals' dot={false} />
+								</LineChart>
+							</ResponsiveContainer>
 						</div>
 					</div>
 				</div>
