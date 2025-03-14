@@ -9,15 +9,15 @@ interface Props {
 export function HomeSubGoal({ subGoal, index }: Props) {
 	return (
 		<article
-			className={clsx('grid grid-cols-2 w-full border-b border-[#2F51A8]', {
+			className={clsx('flex items-center justify-between py-2 w-full border-b border-[#2F51A8]', {
 				'border-t': index == 1,
 			})}
 		>
-			<div className='font-light text-sm pr-1 border-r border-[#2F51A8]'>
+			<div className='font-light text-sm pr-1'>
 				{index}. {subGoal.title}
 			</div>
 			<div className='pl-1 flex items-center gap-1'>
-				<div>
+				{/* <div>
 					<span className='text-xs'>
 						{Intl.DateTimeFormat().format(subGoal.fromDate)}
 					</span>
@@ -25,7 +25,7 @@ export function HomeSubGoal({ subGoal, index }: Props) {
 					<span className='text-xs'>
 						{Intl.DateTimeFormat().format(subGoal.fromDate)}
 					</span>
-				</div>
+				</div> */}
 				<input type='checkbox' className='ml-auto checkbox' />
 			</div>
 		</article>

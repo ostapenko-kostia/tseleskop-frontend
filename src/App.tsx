@@ -9,6 +9,7 @@ import { RegisterPage } from './pages/Register'
 import { PersonalDataAgreementPage } from './pages/PersonalDataAgreement'
 import { HelloPage } from './pages/HelloPage'
 import { LoginPage } from './pages/Login'
+import { CreateGoal } from './pages/CreateGoal'
 
 const PAGES_WITHOUT_AUTH = [
 	'/register',
@@ -41,6 +42,7 @@ function App() {
 			<Route path='/login' element={<LoginPage />} />
 			<Route path='/settings' element={<SettingsPage />} />
 			<Route path='/privacy-policy' element={<PrivacyPolicyPage />} />
+			<Route path='/create-goal' element={<CreateGoal />} />
 			<Route
 				path='/personal-data-agreement'
 				element={<PersonalDataAgreementPage />}
