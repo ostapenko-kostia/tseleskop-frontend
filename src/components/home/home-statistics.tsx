@@ -31,8 +31,7 @@ const lineChartData = [
 
 export function HomeStatistics() {
 	return (
-		<section className='pt-5 font-bold text-lg w-full'>
-			<h2>Статистика</h2>
+		<section className='font-bold text-lg w-full pt-2 px-4'>
 			<div className='relative p-[3px] rounded-xl'>
 				<div
 					className='absolute inset-0 rounded-lg'
@@ -50,7 +49,7 @@ export function HomeStatistics() {
 								Прогрес целей | <span className='font-bold'>ТОП 10</span>
 							</span>
 						</div>
-						<ResponsiveContainer height={120}>
+						<ResponsiveContainer height={120} className='-ml-5'>
 							<BarChart height={120} data={barChartData}>
 								<defs>
 									<linearGradient
@@ -76,7 +75,7 @@ export function HomeStatistics() {
 							Выполненые задачи:
 						</span>
 						<div className='w-full'>
-							<ResponsiveContainer height={120} className='mt-4'>
+							<ResponsiveContainer height={120} className='mt-4 -ml-6'>
 								<LineChart height={120} data={lineChartData}>
 									<XAxis dataKey='name' fontSize={10} />
 									<YAxis dataKey='goals' fontSize={12} />
