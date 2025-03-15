@@ -2,7 +2,7 @@ export interface Goal {
 	id: number
 	title: string
 	description: string
-	urgency: "low" | "average" | "high"
+	urgencyLevel: "low" | "average" | "high"
 	deadline: Date
 	subGoals?: SubGoal[]
 	isDone: boolean
@@ -10,9 +10,9 @@ export interface Goal {
 
 export interface SubGoal { 
 	id: number
-	title: string;
-	fromDate: Date
-	toDate: Date
-	isDone: boolean
+	description: string;
+	// fromDate: Date
+	// toDate: Date
+	isCompleted: boolean
 	goalId: number	
 }

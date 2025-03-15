@@ -14,7 +14,7 @@ export function HomeSubGoal({ subGoal, index }: Props) {
 			})}
 		>
 			<div className='font-light text-sm pr-1'>
-				{index}. {subGoal.title}
+				{index}. {subGoal.description}
 			</div>
 			<div className='pl-1 flex items-center gap-1'>
 				{/* <div>

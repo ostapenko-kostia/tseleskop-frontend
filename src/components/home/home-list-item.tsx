@@ -41,7 +41,7 @@ export function HomeListItem({ goal, index }: Props) {
 							/>
 						</div>
 						<div className='text-xs w-min ml-auto mt-2 bg-[#727473] text-white text-nowrap rounded-md px-4 py-1'>
-							до {Intl.DateTimeFormat().format(goal.deadline)}
+							до {Intl.DateTimeFormat().format(new Date(goal.deadline))}
 						</div>
 						<div className='mt-2'>
 							{goal.subGoals?.map((subGoal, i) => (
@@ -55,7 +55,10 @@ export function HomeListItem({ goal, index }: Props) {
 			<div
 				className='w-14 mr-2 h-[32px]'
 				style={{
-					backgroundColor: URGENCY_COLORS[goal.urgency],
+					backgroundColor:
+						URGENCY_COLORS[
+							goal.urgencyLevel.toLowerCase() as keyof typeof URGENCY_COLORS
+						],
 				}}
 			/>
 		</article>

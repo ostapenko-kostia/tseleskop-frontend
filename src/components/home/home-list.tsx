@@ -1,121 +1,21 @@
 import { useState } from 'react'
 import { HomeListItem, URGENCY_COLORS } from './home-list-item'
-import { Goal } from '../../types/goal'
 import { MenuIcon } from 'lucide-react'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import clsx from 'clsx'
+import { useGetGoals } from '../../hooks/useGoal'
+import { Goal } from '../../types/goal'
 
 export function HomeList() {
 	const [urgencyLevel, setUrgencyLevel] = useState<
 		'all' | 'low' | 'average' | 'high'
 	>('all')
-	const [goals] = useState<Goal[]>([
-		{
-			id: 1,
-			title: 'Похудеть к лету 2025 года',
-			description: 'абтаоты ыва тцтушоат щцтуатлц ут латлцутазлзлбл',
-			urgency: 'high',
-			deadline: new Date('2025-08-25'),
-			isDone: false,
-			subGoals: [
-				{
-					id: 1,
-					title: 'Записаться в зал в Январе',
-					fromDate: new Date('2025-01-15'),
-					toDate: new Date('2025-01-25'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 2,
-					title: 'Найти тренера',
-					fromDate: new Date('2025-01-26'),
-					toDate: new Date('2025-02-02'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 3,
-					title: 'Создать программу тренировок',
-					fromDate: new Date('2025-02-05'),
-					toDate: new Date('2025-02-15'),
-					isDone: false,
-					goalId: 1,
-				},
-			],
-		},
-		{
-			id: 1,
-			title: 'Похудеть к лету 2025 года',
-			description: 'абтаоты ыва тцтушоат щцтуатлц ут латлцутазлзлбл',
-			urgency: 'average',
-			deadline: new Date('2025-08-25'),
-			isDone: false,
-			subGoals: [
-				{
-					id: 1,
-					title: 'Записаться в зал в Январе',
-					fromDate: new Date('2025-01-15'),
-					toDate: new Date('2025-01-25'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 2,
-					title: 'Найти тренера',
-					fromDate: new Date('2025-01-26'),
-					toDate: new Date('2025-02-02'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 3,
-					title: 'Создать программу тренировок',
-					fromDate: new Date('2025-02-05'),
-					toDate: new Date('2025-02-15'),
-					isDone: false,
-					goalId: 1,
-				},
-			],
-		},
-		{
-			id: 1,
-			title: 'Похудеть к лету 2025 года',
-			description: 'абтаоты ыва тцтушоат щцтуатлц ут латлцутазлзлбл',
-			urgency: 'low',
-			deadline: new Date('2025-08-25'),
-			isDone: false,
-			subGoals: [
-				{
-					id: 1,
-					title: 'Записаться в зал в Январе',
-					fromDate: new Date('2025-01-15'),
-					toDate: new Date('2025-01-25'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 2,
-					title: 'Найти тренера',
-					fromDate: new Date('2025-01-26'),
-					toDate: new Date('2025-02-02'),
-					isDone: false,
-					goalId: 1,
-				},
-				{
-					id: 3,
-					title: 'Создать программу тренировок',
-					fromDate: new Date('2025-02-05'),
-					toDate: new Date('2025-02-15'),
-					isDone: false,
-					goalId: 1,
-				},
-			],
-		},
-	])
+
+	const { data: goals } = useGetGoals()
+
 	return (
-		<section className='pt-8'>
+		<section className='pt-8 flex flex-col items-center'>
 			<div className='relative w-full mb-10'>
 				<h2 className='font-bold text-xl uppercase absolute left-1/2 top-1/2 -translate-y-1/2 bg-white z-10 px-3 text-nowrap -translate-x-1/2'>
 					Перечень целей
@@ -194,15 +94,26 @@ export function HomeList() {
 				</Popup>
 			</div>
 
-			<div>
-				{goals
-					.filter(
-						goal => urgencyLevel === 'all' || goal.urgency === urgencyLevel
-					)
-					.map((goal, index) => (
-						<HomeListItem goal={goal} key={index} index={index + 1} />
-					))}
-			</div>
+			{goals ? (
+				goals.data.length ? (
+					goals.data
+						.filter(
+							(goal: Goal) =>
+								urgencyLevel === 'all' || goal.urgencyLevel.toLowerCase() === urgencyLevel
+						)
+						.map((goal: Goal, index: number) => (
+							<HomeListItem goal={goal} key={index} index={index + 1} />
+						))
+				) : (
+					<span className='font-semibold text-lg mt-5'>
+						У вас еще нет целей. Создайте свою первую цель!
+					</span>
+				)
+			) : (
+				<span className='font-semibold text-lg mt-5'>
+					Ошибка во время получения целей. Попробуйте перезагрузить страницу
+				</span>
+			)}
 		</section>
 	)
 }

@@ -18,6 +18,7 @@ import {
 	CreateGoalTitleField,
 	CreateGoalUrgency,
 } from '../components/create-goal'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface Form {
 	title: string
@@ -35,6 +36,7 @@ interface Form {
 
 export function CreateGoal() {
 	const navigate = useNavigate()
+	const queryClient = useQueryClient()
 	const { register, handleSubmit, setValue, watch, reset } = useForm<Form>({
 		defaultValues: {
 			privacy: 'PRIVATE',
@@ -45,6 +47,7 @@ export function CreateGoal() {
 
 	const { mutate: createGoal, isPending } = useCreateGoal(() => {
 		reset()
+		queryClient.invalidateQueries({ queryKey: ['get goals'] })
 		setTimeout(() => navigate('/'), 1000)
 	})
 
