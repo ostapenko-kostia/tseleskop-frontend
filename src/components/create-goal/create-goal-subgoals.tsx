@@ -112,7 +112,7 @@ export function CreateGoalSubGoal({
 								}}
 								onOpen={() => setSubGoalCreateOpen(true)}
 								onClose={() => setSubGoalCreateOpen(false)}
-								position='bottom left'
+								position='top left'
 								arrow={false}
 								trigger={
 									<button

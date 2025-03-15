@@ -10,7 +10,7 @@ export function CreateGoalSpecific({
 		<Block
 			titleSize={14}
 			popup={<span>Например, увеличить прибыль своего предприятия.</span>}
-			title='1. Specific (Конкретность) Объясни, что именно необходимо достигнуть?*'
+			title='1. Specific (Конкретность) Объясни, что именно необходимо достигнуть'
 		>
 			<div className='w-full px-4'>
 				<input

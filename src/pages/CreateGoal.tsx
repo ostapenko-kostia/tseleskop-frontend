@@ -19,6 +19,7 @@ import {
 	CreateGoalUrgency,
 } from '../components/create-goal'
 import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 interface Form {
 	title: string
@@ -44,6 +45,21 @@ export function CreateGoal() {
 			urgencyLevel: 'LOW',
 		},
 	})
+
+	useEffect(() => {
+		setValue(
+			'description',
+			`${watch('specific')} ${watch('measurable')} ${watch(
+				'attainable'
+			)} ${watch('award')} ${watch('relevant')}`
+		)
+	}, [
+		watch('specific'),
+		watch('measurable'),
+		watch('attainable'),
+		watch('award'),
+		watch('relevant'),
+	])
 
 	const { mutate: createGoal, isPending } = useCreateGoal(() => {
 		reset()

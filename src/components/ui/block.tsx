@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { JSX, PropsWithChildren } from 'react'
 import Popup from 'reactjs-popup'
 
@@ -32,13 +33,19 @@ export function Block({
 					}}
 					trigger={
 						<div
-							className='rounded-t-lg text-white py-0.5 px-1 font-semibold text-center'
+							className={clsx(
+								'rounded-t-lg relative text-white py-0.5 px-1 font-semibold text-center',
+								{
+									'pb-5': popup,
+								}
+							)}
 							style={{
 								background: 'linear-gradient(90deg, #2F51A8 0%, #122042 100%)',
 								fontSize: titleSize,
 							}}
 						>
 							{title}
+							{popup && <span className='absolute right-2 bottom-0'>?</span>}
 						</div>
 					}
 				>

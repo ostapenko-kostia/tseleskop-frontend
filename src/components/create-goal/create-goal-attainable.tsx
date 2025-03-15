@@ -18,7 +18,7 @@ export function CreateGoalAttainable({
 					операций сотрудников на 80% от текущего количества.
 				</span>
 			}
-			title='3. Attainable (Достижимость) Объясни, за счет чего планируется достигнуть цели?*'
+			title='3. Attainable (Достижимость) Объясни, за счет чего планируется достигнуть цели'
 		>
 			<div className='w-full px-4'>
 				<input

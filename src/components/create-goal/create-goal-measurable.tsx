@@ -17,7 +17,7 @@ export function CreateGoalMeasurable({
 					года.
 				</span>
 			}
-			title='2. Measurable (Измеримость) Объясни, в чем будет измеряться результат?*'
+			title='2. Measurable (Измеримость) Объясни, в чем будет измеряться результат'
 		>
 			<div className='w-full px-4'>
 				<input
