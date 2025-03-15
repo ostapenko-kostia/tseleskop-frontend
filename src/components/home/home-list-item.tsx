@@ -15,12 +15,12 @@ export const URGENCY_COLORS = {
 
 export function HomeListItem({ goal, index }: Props) {
 	return (
-		<article className='flex items-start w-full'>
-			<div className='w-12 aspect-square h-12 bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
+		<article className='flex w-full'>
+			<div className='w-12 min-h-12 h-full bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
 				{index}
 			</div>
 			<details className='w-full'>
-				<summary className='text-white px-2 h-8 flex items-center py-0.5 text-lg appearance-none bg-[#27448D] max-[370px]:text-sm'>
+				<summary className='text-white px-2 flex items-center py-0.5 text-lg appearance-none bg-[#27448D] max-[370px]:text-sm'>
 					{goal.title}
 				</summary>
 				<div className='relative p-[3px] rounded-xl'>
@@ -34,7 +34,7 @@ export function HomeListItem({ goal, index }: Props) {
 					<div className='relative bg-white rounded-b-md p-2'>
 						<div className='flex gap-1 items-center'>
 							<h3 className='text-sm font-bold'>Описание:</h3>
-							<span className='w-full text-xs'>{goal.description}</span>
+							<span className='w-full text-xs whitespace-pre-wrap	'>{goal.description}</span>
 							<input
 								type='checkbox'
 								className='checkbox !border-green-500 scale-125'

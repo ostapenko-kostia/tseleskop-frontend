@@ -31,7 +31,7 @@ interface Form {
 	relevant: string
 	privacy: 'PRIVATE' | 'PUBLIC'
 	deadline: '3_MONTHS' | '6_MONTHS' | '1_YEAR'
-	subGoals?: { description: string }[]
+	subGoals?: { description: string; deadline: Date }[]
 }
 
 export function CreateGoal() {

@@ -9,23 +9,20 @@ interface Props {
 export function HomeSubGoal({ subGoal, index }: Props) {
 	return (
 		<article
-			className={clsx('flex items-center justify-between py-2 w-full border-b border-[#2F51A8]', {
-				'border-t': index == 1,
-			})}
+			className={clsx(
+				'flex items-center justify-between w-full border-b border-[#2F51A8]',
+				{
+					'border-t': index == 1,
+				}
+			)}
 		>
-			<div className='font-light text-sm pr-1'>
+			<div className='font-light text-sm pr-1 py-2'>
 				{index}. {subGoal.description}
 			</div>
-			<div className='pl-1 flex items-center gap-1'>
-				{/* <div>
-					<span className='text-xs'>
-						{Intl.DateTimeFormat().format(subGoal.fromDate)}
-					</span>
-					{' - '}
-					<span className='text-xs'>
-						{Intl.DateTimeFormat().format(subGoal.fromDate)}
-					</span>
-				</div> */}
+			<div className='flex items-center gap-1 border-l border-[#2F51A8]'>
+				<span className='text-xs py-2 pl-3'>
+					до {Intl.DateTimeFormat().format(new Date(subGoal.deadline))}
+				</span>
 				<input type='checkbox' className='ml-auto checkbox' />
 			</div>
 		</article>

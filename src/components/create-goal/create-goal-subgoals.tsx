@@ -1,9 +1,10 @@
+import { CheckIcon, EditIcon, XIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import Popup from 'reactjs-popup'
 import { Block } from '../ui/block'
 import { Button } from '../ui/button'
-import { CheckIcon } from 'lucide-react'
-import Popup from 'reactjs-popup'
-import { useEffect, useState } from 'react'
 
 export function CreateGoalSubGoal({
 	watch,
@@ -13,7 +14,9 @@ export function CreateGoalSubGoal({
 	setValue: UseFormSetValue<any>
 }) {
 	const [subGoalTemp, setSubGoalTemp] = useState<string>('')
+	const [subGoalDateTemp, setSubGoalDateTemp] = useState<Date | null>()
 	const [subGoalCreateOpen, setSubGoalCreateOpen] = useState<boolean>(false)
+	const [editingIndex, setEditingIndex] = useState<number | null>(null)
 
 	useEffect(() => {
 		setSubGoalCreateOpen(false)
@@ -21,19 +24,53 @@ export function CreateGoalSubGoal({
 
 	const handleAddSubGoal = () => {
 		const value = watch('subGoals')
+
+		if (!subGoalTemp || !subGoalDateTemp) {
+			toast.error('Заполните все поля')
+			return
+		}
+
 		if (value) {
-			setValue('subGoals', [...value, { description: subGoalTemp }])
+			setValue('subGoals', [
+				...value,
+				{ description: subGoalTemp, deadline: subGoalDateTemp },
+			])
 		} else {
-			setValue('subGoals', [{ description: subGoalTemp }])
+			setValue('subGoals', [
+				{ description: subGoalTemp, deadline: subGoalDateTemp },
+			])
 		}
 		setSubGoalTemp('')
+		setSubGoalDateTemp(null)
 	}
 
-	const handleRemoveSubGoal = (description: string) => {
-		const value = watch('subGoals')?.filter(
-			(goal: any) => goal.description !== description
-		)
+	const handleRemoveSubGoal = (index: number) => {
+		const value = watch('subGoals')?.filter((_: any, i: number) => i !== index)
 		setValue('subGoals', value)
+	}
+
+	const handleEditSubGoal = (index: number) => {
+		const subGoal = watch('subGoals')[index]
+		setSubGoalTemp(subGoal.description)
+		setSubGoalDateTemp(subGoal.deadline)
+		setEditingIndex(index)
+		setSubGoalCreateOpen(true)
+	}
+
+	const handleUpdateSubGoal = () => {
+		if (editingIndex === null) return
+
+		const updatedSubGoals = watch('subGoals').map((goal: any, index: number) =>
+			index === editingIndex
+				? { description: subGoalTemp, deadline: subGoalDateTemp }
+				: goal
+		)
+
+		setValue('subGoals', updatedSubGoals)
+		setEditingIndex(null)
+		setSubGoalTemp('')
+		setSubGoalDateTemp(null)
+		setSubGoalCreateOpen(false)
 	}
 
 	return (
@@ -45,15 +82,23 @@ export function CreateGoalSubGoal({
 							<td className='border border-[#2F51A8] px-4 py-2 text-center'>
 								{index + 1}
 							</td>
-							<td className='border border-[#2F51A8] px-4 py-2'>
-								{goal.description}
+							<td className='border border-[#2F51A8] px-4 py-2 w-full'>
+								{goal.description.length > 50
+									? goal.description.slice(0, 50) + '...'
+									: goal.description}
 							</td>
-							<td className='border border-[#2F51A8] px-4 py-2'>
+							<td className='px-2 text-nowrap'>
+								до {Intl.DateTimeFormat().format(goal.deadline)}
+							</td>
+							<td className='border border-[#2F51A8] px-4 py-2 flex items-center gap-4'>
 								<button
 									type='button'
-									onClick={() => handleRemoveSubGoal(goal.description)}
+									onClick={() => handleRemoveSubGoal(index)}
 								>
-									-
+									<XIcon size={24} />
+								</button>
+								<button type='button' onClick={() => handleEditSubGoal(index)}>
+									<EditIcon size={24} />
 								</button>
 							</td>
 						</tr>
@@ -62,6 +107,9 @@ export function CreateGoalSubGoal({
 						<td colSpan={3}>
 							<Popup
 								open={subGoalCreateOpen}
+								contentStyle={{
+									width: '80%',
+								}}
 								onOpen={() => setSubGoalCreateOpen(true)}
 								onClose={() => setSubGoalCreateOpen(false)}
 								position='bottom left'
@@ -76,20 +124,33 @@ export function CreateGoalSubGoal({
 								}
 							>
 								<div className='w-full flex items-center gap-2'>
-									<input
-										type='text'
-										className='outline-none w-full'
-										placeholder='Введите описание'
-										value={subGoalTemp ?? ''}
+									<textarea
 										onChange={e => setSubGoalTemp(e.target.value)}
+										placeholder='Введите описание'
+										required
+										className='w-full outline-none resize-none'
 									/>
 									<Button
 										type='button'
-										onClick={handleAddSubGoal}
+										onClick={
+											editingIndex !== null
+												? handleUpdateSubGoal
+												: handleAddSubGoal
+										}
 										className='aspect-square !p-2 rounded-sm'
 									>
 										<CheckIcon />
 									</Button>
+								</div>
+								<div className='mt-3'>
+									Крайний срок
+									<input
+										type='date'
+										onKeyDown={e => e.preventDefault()}
+										onChange={e => setSubGoalDateTemp(new Date(e.target.value))}
+										value={subGoalDateTemp?.toISOString().split('T')[0]}
+										className='w-full outline-none resize-none border mt-2 p-2 rounded-md border-gray-100'
+									/>
 								</div>
 							</Popup>
 						</td>

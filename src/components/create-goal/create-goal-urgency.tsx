@@ -22,7 +22,12 @@ export function CreateGoalUrgency({
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['low'] }}
 					/>{' '}
-					<span className='text-sm'>Желаймая</span>
+					<span
+						onClick={() => setValue('urgencyLevel', 'LOW')}
+						className='text-sm'
+					>
+						Желаймая
+					</span>
 				</div>
 				<div className='flex items-center gap-2'>
 					<button
@@ -33,7 +38,12 @@ export function CreateGoalUrgency({
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['average'] }}
 					/>{' '}
-					<span className='text-sm'>Нужная</span>
+					<span
+						onClick={() => setValue('urgencyLevel', 'AVERAGE')}
+						className='text-sm'
+					>
+						Нужная
+					</span>
 				</div>
 				<div className='flex items-center gap-2'>
 					<button
@@ -44,7 +54,12 @@ export function CreateGoalUrgency({
 						})}
 						style={{ backgroundColor: URGENCY_COLORS['high'] }}
 					/>{' '}
-					<span className='text-sm'>Важная</span>
+					<span
+						onClick={() => setValue('urgencyLevel', 'HIGH')}
+						className='text-sm'
+					>
+						Важная
+					</span>
 				</div>
 			</div>
 		</Block>

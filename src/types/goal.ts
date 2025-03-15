@@ -11,8 +11,7 @@ export interface Goal {
 export interface SubGoal { 
 	id: number
 	description: string;
-	// fromDate: Date
-	// toDate: Date
+	deadline: Date
 	isCompleted: boolean
 	goalId: number	
 }
