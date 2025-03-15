@@ -3,8 +3,10 @@ import { HomeCreateGoal } from '../components/home/home-create-goal'
 import { HomeList } from '../components/home/home-list'
 import { HomeStatistics } from '../components/home/home-statistics'
 import { SettingsIcon } from 'lucide-react'
+import { useAuthStore } from '../store/auth.store'
 
 export function HomePage() {
+	const { isAuth } = useAuthStore()
 	return (
 		<section>
 			<div className='px-4 flex items-end justify-between gap-1 w-full'>
@@ -15,7 +17,7 @@ export function HomePage() {
 				</Link>
 			</div>
 			<HomeStatistics />
-			<HomeList />
+			{isAuth && <HomeList />}
 			<HomeCreateGoal className='fixed bottom-5 right-5 [&_button]:aspect-square [&_button]:p-0 [&_button]:w-16 text-4xl [&_button]:h-16 [&_button]:flex [&_button]:items-center [&_button]:justify-center' />
 		</section>
 	)
