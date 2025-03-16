@@ -78,19 +78,19 @@ export function CreateGoalSubGoal({
 			<table className='w-full border-collapse border-t scale-95 border-[#2F51A8]'>
 				<tbody>
 					{watch('subGoals')?.map((goal: any, index: number) => (
-						<tr key={index} className='border border-[#2F51A8]'>
-							<td className='border border-[#2F51A8] px-4 py-2 text-center'>
+						<tr key={index} className='border border-[#2F51A8] flex items-center'>
+							<td className='border-r aspect-square border-[#2F51A8] py-2 w-24 text-center'>
 								{index + 1}
 							</td>
-							<td className='border border-[#2F51A8] px-4 py-2 w-full'>
-								{goal.description.length > 50
-									? goal.description.slice(0, 50) + '...'
+							<td className='border-r border-[#2F51A8] px-4 py-2 w-full line-clamp-1'>
+								{goal.description.length > 25
+									? goal.description.slice(0, 25) + '...'
 									: goal.description}
 							</td>
 							<td className='px-2 text-nowrap'>
 								до {Intl.DateTimeFormat().format(goal.deadline)}
 							</td>
-							<td className='border border-[#2F51A8] px-4 py-2 flex items-center gap-4'>
+							<td className='border-l border-[#2F51A8] px-4 py-2 flex items-center gap-4'>
 								<button
 									type='button'
 									onClick={() => handleRemoveSubGoal(index)}

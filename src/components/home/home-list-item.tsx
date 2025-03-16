@@ -15,7 +15,7 @@ export const URGENCY_COLORS = {
 
 export function HomeListItem({ goal, index }: Props) {
 	return (
-		<article className='flex w-full'>
+		<article className='flex w-full mb-4'>
 			<div className='w-12 min-h-12 h-full bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
 				{index}
 			</div>
@@ -34,7 +34,9 @@ export function HomeListItem({ goal, index }: Props) {
 					<div className='relative bg-white rounded-b-md p-2'>
 						<div className='flex gap-1 items-center'>
 							<h3 className='text-sm font-bold'>Описание:</h3>
-							<span className='w-full text-xs whitespace-pre-wrap	'>{goal.description}</span>
+							<span className='w-full text-xs whitespace-pre-wrap	'>
+								{goal.description}
+							</span>
 							<input
 								type='checkbox'
 								className='checkbox !border-green-500 scale-125'
@@ -43,12 +45,14 @@ export function HomeListItem({ goal, index }: Props) {
 						<div className='text-xs w-min ml-auto mt-2 bg-[#727473] text-white text-nowrap rounded-md px-4 py-1'>
 							до {Intl.DateTimeFormat().format(new Date(goal.deadline))}
 						</div>
-						<div className='mt-2'>
-							{goal.subGoals?.map((subGoal, i) => (
-								<HomeSubGoal key={i} subGoal={subGoal} index={i + 1} />
-							))}
-						</div>
-						<EditIcon className='mr-auto mt-3' />
+						<table className='w-full mt-2 border-collapse border border-[#2F51A8]'>
+							<tbody>
+								{goal.subGoals?.map((subGoal, i) => (
+									<HomeSubGoal key={i} subGoal={subGoal} index={i + 1} />
+								))}
+							</tbody>
+						</table>
+					<EditIcon className='mr-auto mt-3' />
 					</div>
 				</div>
 			</details>

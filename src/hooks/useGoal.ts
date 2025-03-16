@@ -6,7 +6,7 @@ export function useCreateGoal(cb?: () => void) {
 	return useMutation({
 		mutationFn: async ({ data }: { data: any }) => {
 			const res = await goalService.createGoal(data)
-			if (!res?.data) Promise.reject()
+			if (res?.status !== 200) throw new Error()
 			return res
 		},
 		onSuccess: () => {
@@ -21,8 +21,8 @@ export function useGetGoals() {
 		queryKey: ['get goals'],
 		queryFn: async () => {
 			const res = await goalService.getGoals()
-			if (!res?.data) Promise.reject()
-			return res
+			if (res?.status !== 200) throw new Error()
+			return res	
 		},
 		refetchOnWindowFocus: false,
 		staleTime: Infinity,
