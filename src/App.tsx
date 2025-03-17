@@ -35,7 +35,7 @@ function App() {
 		}
 
 		createFriendship()
-	}, [])
+	}, [isAuth])
 
 	useEffect(() => {
 		if (!isAuth && !PAGES_WITHOUT_AUTH.includes(location.pathname))
