@@ -26,7 +26,10 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		const inviteId = window.Telegram.WebApp.initDataUnsafe.start_param
+		const inviteCode = window.Telegram.WebApp.initDataUnsafe.start_param
+		if (!inviteCode.includes('invite')) return
+
+		const inviteId = inviteCode.split('_')[1]
 
 		async function createFriendship() {
 			if (isAuth && inviteId.length) {
