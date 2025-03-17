@@ -51,7 +51,7 @@ export function SettingsFriendsGoals() {
 				</summary>
 				<div className='flex flex-col px-4 gap-6 mt-6'>
 					{friends?.map(friend => {
-						const friendGoals = friendsGoals?.find(
+						const friendGoals = friendsGoals?.filter(
 							goal => goal.userId === friend.id
 						)
 
@@ -83,7 +83,7 @@ export function SettingsFriendsGoals() {
 								</summary>
 								<div className='bg-white border-2 border-[#27448D] rounded-b-md p-4 flex items-center flex-col'>
 									{friendGoals ? (
-										friendGoals.map((friendGoal: any, index: number) => {
+										friendGoals?.map((friendGoal: any, index: number) => {
 											const subGoals = friendGoal.subGoals
 											const completedSubGoals = subGoals.filter(
 												(subGoal: SubGoal) => subGoal.isCompleted
