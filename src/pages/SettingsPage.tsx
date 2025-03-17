@@ -5,12 +5,24 @@ import { SettingsFriendsGoals } from '../components/settings/settings-friends-go
 import { SettingsNotifies } from '../components/settings/settings-notifies'
 import { SettingsUserInfo } from '../components/settings/settings-user-info/settings-user-info'
 import { SettingsUserName } from '../components/settings/settings-user-name/settings-user-name'
+import { useChangeSettings, useGetSettings } from '../hooks/useChangeSettings'
 
 export function SettingsPage() {
-	const [taskNotify, setTaskNotify] = useState(false)
-	const [taskNotifyDayToDay, setTaskNotifyDayToDay] = useState(false)
-	const [goalNotify, setGoalNotify] = useState(false)
-	const [customNotifies, setCustomNotifies] = useState(false)
+	const { data: settings } = useGetSettings()
+
+	const [todaySubGoalsNotifications, setTodaySubGoalsNotifications] =
+		useState<boolean>(settings?.todaySubGoalsNotifications ?? true)
+	const [tomorrowSubGoalNotifications, setTomorrowSubGoalNotifications] =
+		useState<boolean>(settings?.tomorrowSubGoalsNotifications ?? true)
+	const [
+		monthlyGoalDeadlineNotifications,
+		setMonthlyGoalDeadlineNotifications,
+	] = useState<boolean>(settings?.monthlyGoalDeadlineNotifications ?? true)
+	const [customNotifications, setCustomNotifications] = useState<boolean>(
+		settings?.customNotifications ?? true
+	)
+
+	const { mutateAsync: changeSettings } = useChangeSettings()
 
 	return (
 		<section className='relative'>
@@ -23,14 +35,17 @@ export function SettingsPage() {
 			<SettingsUserName />
 
 			<SettingsNotifies
-				customNotifies={customNotifies}
-				setCustomNotifies={setCustomNotifies}
-				goalNotify={goalNotify}
-				setGoalNotify={setGoalNotify}
-				taskNotify={taskNotify}
-				setTaskNotify={setTaskNotify}
-				taskNotifyDayToDay={taskNotifyDayToDay}
-				setTaskNotifyDayToDay={setTaskNotifyDayToDay}
+				onChange={changeSettings}
+				customNotifications={customNotifications}
+				setCustomNotifications={setCustomNotifications}
+				monthlyGoalDeadlineNotifications={monthlyGoalDeadlineNotifications}
+				setMonthlyGoalDeadlineNotifications={
+					setMonthlyGoalDeadlineNotifications
+				}
+				todaySubGoalsNotifications={todaySubGoalsNotifications}
+				setTodaySubGoalsNotifications={setTodaySubGoalsNotifications}
+				tomorrowSubGoalNotifications={tomorrowSubGoalNotifications}
+				setTomorrowSubGoalNotifications={setTomorrowSubGoalNotifications}
 			/>
 
 			<SettingsFriendsGoals />

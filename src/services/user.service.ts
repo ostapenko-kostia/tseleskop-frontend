@@ -23,6 +23,14 @@ class UserService {
 	async getUser(id: string) {
 		return await api.get<IUser>(`/user/${id}`)
 	}
+
+	async changeSettings(data: any) {
+		return await api.put('/user/notification-settings', data)
+	}
+
+	async getSettings() {
+		return await api.get('/user/notification-settings')
+	}
 }
 
 export const userService = new UserService()

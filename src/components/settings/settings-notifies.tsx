@@ -1,25 +1,27 @@
 import Switch from '../ui/switch'
 
 interface Props {
-	taskNotify: boolean
-	setTaskNotify: (i: boolean) => void
-	taskNotifyDayToDay: boolean
-	setTaskNotifyDayToDay: (i: boolean) => void
-	goalNotify: boolean
-	setGoalNotify: (i: boolean) => void
-	customNotifies: boolean
-	setCustomNotifies: (i: boolean) => void
+	monthlyGoalDeadlineNotifications: boolean
+	setMonthlyGoalDeadlineNotifications: (i: boolean) => void
+	todaySubGoalsNotifications: boolean
+	setTodaySubGoalsNotifications: (i: boolean) => void
+	tomorrowSubGoalNotifications: boolean
+	setTomorrowSubGoalNotifications: (i: boolean) => void
+	customNotifications: boolean
+	setCustomNotifications: (i: boolean) => void
+	onChange: (data: any) => void
 }
 
 export function SettingsNotifies({
-	setTaskNotify,
-	taskNotify,
-	customNotifies,
-	goalNotify,
-	setCustomNotifies,
-	setGoalNotify,
-	setTaskNotifyDayToDay,
-	taskNotifyDayToDay,
+	todaySubGoalsNotifications,
+	setTodaySubGoalsNotifications,
+	tomorrowSubGoalNotifications,
+	setTomorrowSubGoalNotifications,
+	monthlyGoalDeadlineNotifications,
+	setMonthlyGoalDeadlineNotifications,
+	customNotifications,
+	setCustomNotifications,
+	onChange,
 }: Props) {
 	return (
 		<details className='mt-5' open>
@@ -40,11 +42,19 @@ export function SettingsNotifies({
 						}}
 					/>
 					<div className='relative bg-white flex items-center justify-between rounded-md py-1.5 px-3'>
-						<p className='underline text-sm'>Уведомлять по задачам на день</p>
+						<p className='underline text-sm'>Уведомлять по задачам за день</p>
 						<Switch
 							className='scale-120'
-							checked={taskNotify}
-							onChange={setTaskNotify}
+							checked={tomorrowSubGoalNotifications}
+							onChange={checked => {
+								setTomorrowSubGoalNotifications(checked)
+								onChange({
+									tomorrowSubGoalNotifications: checked,
+									todaySubGoalsNotifications,
+									monthlyGoalDeadlineNotifications,
+									customNotifications,
+								})
+							}}
 						/>
 					</div>
 				</div>
@@ -56,13 +66,19 @@ export function SettingsNotifies({
 						}}
 					/>
 					<div className='relative bg-white flex items-center justify-between rounded-md py-1.5 px-3'>
-						<p className='underline text-sm'>
-							Уведомлять по задачам день в день
-						</p>
+						<p className='underline text-sm'>Уведомлять по задачам на день</p>
 						<Switch
 							className='scale-120'
-							checked={taskNotifyDayToDay}
-							onChange={setTaskNotifyDayToDay}
+							checked={todaySubGoalsNotifications}
+							onChange={checked => {
+								setTodaySubGoalsNotifications(checked)
+								onChange({
+									tomorrowSubGoalNotifications,
+									todaySubGoalsNotifications: checked,
+									monthlyGoalDeadlineNotifications,
+									customNotifications,
+								})
+							}}
 						/>
 					</div>
 				</div>
@@ -77,8 +93,16 @@ export function SettingsNotifies({
 						<p className='underline text-sm'>Уведомлять по целям за 1 месяц</p>
 						<Switch
 							className='scale-120'
-							checked={goalNotify}
-							onChange={setGoalNotify}
+							checked={monthlyGoalDeadlineNotifications}
+							onChange={checked => {
+								setMonthlyGoalDeadlineNotifications(checked)
+								onChange({
+									tomorrowSubGoalNotifications,
+									todaySubGoalsNotifications,
+									monthlyGoalDeadlineNotifications: checked,
+									customNotifications,
+								})
+							}}
 						/>
 					</div>
 				</div>
@@ -93,8 +117,16 @@ export function SettingsNotifies({
 						<p className='underline text-sm'>Произвольные уведомления</p>
 						<Switch
 							className='scale-120'
-							checked={customNotifies}
-							onChange={setCustomNotifies}
+							checked={customNotifications}
+							onChange={checked => {
+								setCustomNotifications(checked)
+								onChange({
+									tomorrowSubGoalNotifications,
+									todaySubGoalsNotifications,
+									monthlyGoalDeadlineNotifications,
+									customNotifications: checked,
+								})
+							}}
 						/>
 					</div>
 				</div>
