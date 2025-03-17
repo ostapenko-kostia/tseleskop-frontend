@@ -25,6 +25,11 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
+		console.log(window.Telegram.WebApp.initDataUnsafe)
+		console.log(window.Telegram.WebApp.initDataUnsafe.start_param)
+	}, [])
+
+	useEffect(() => {
 		console.log(location.pathname)
 		if (!isAuth && !PAGES_WITHOUT_AUTH.includes(location.pathname))
 			navigate('/register')
