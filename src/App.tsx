@@ -10,6 +10,7 @@ import { PersonalDataAgreementPage } from './pages/PersonalDataAgreement'
 import { HelloPage } from './pages/HelloPage'
 import { LoginPage } from './pages/Login'
 import { CreateGoal } from './pages/CreateGoal'
+import { friendshipService } from './services/friendship.service'
 
 const PAGES_WITHOUT_AUTH = [
 	'/register',
@@ -25,12 +26,18 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		console.log(window.Telegram.WebApp.initDataUnsafe)
-		console.log(window.Telegram.WebApp.initDataUnsafe.start_param)
+		const inviteId = window.Telegram.WebApp.initDataUnsafe.start_param
+
+		async function createFriendship() {
+			if (isAuth && inviteId.length) {
+				await friendshipService.createFriendship(inviteId)
+			}
+		}
+
+		createFriendship()
 	}, [])
 
 	useEffect(() => {
-		console.log(location.pathname)
 		if (!isAuth && !PAGES_WITHOUT_AUTH.includes(location.pathname))
 			navigate('/register')
 	}, [isAuth, location.pathname])
