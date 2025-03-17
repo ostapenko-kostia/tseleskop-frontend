@@ -4,4 +4,5 @@ export interface IUser {
 	id: string
 	username: string
 	photoUrl: string
+	inviteCode: string
 }

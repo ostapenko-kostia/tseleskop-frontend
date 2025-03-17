@@ -26,8 +26,8 @@ function App() {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		const inviteCode = window.Telegram.WebApp.initDataUnsafe.start_param
-		if (!inviteCode.includes('invite')) return
+		const inviteCode = window?.Telegram?.WebApp?.initDataUnsafe?.start_param
+		if (!inviteCode?.includes('invite')) return
 
 		const inviteId = inviteCode.split('_')[1]
 
