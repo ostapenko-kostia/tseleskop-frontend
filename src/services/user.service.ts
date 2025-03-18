@@ -25,11 +25,11 @@ class UserService {
 	}
 
 	async changeSettings(data: any) {
-		return await api.put('/user/notification-settings', data)
+		return await api.put('/settings/edit', data)
 	}
 
 	async getSettings() {
-		return await api.get('/user/notification-settings')
+		return await api.get('/settings')
 	}
 }
 

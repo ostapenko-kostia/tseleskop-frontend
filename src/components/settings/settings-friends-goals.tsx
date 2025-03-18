@@ -18,18 +18,10 @@ export function SettingsFriendsGoals() {
 
 	return (
 		<>
-			<div className='px-4 flex flex-col items-center gap-3 mt-5'>
-				<p className='text-sm text-center mt-2'>
-					Твоя ссылка для приглашения друзей:
-				</p>
-				<div
-					className='text-sm text-center border p-2 border-gray-200 rounded-md mx-auto bg-white
-			'
-				>
-					{`https://t.me/celiscope_bot/celiscope?startapp=${user?.inviteCode}`}
-				</div>
+			<div className='px-4 flex items-center justify-center gap-3 mt-5'>
+				<p className='text-sm text-start'>Ссылка для приглашения друзей</p>
 				<Button
-					className='w-min'
+					className='w-min !py-1 !px-4 !text-sm rounded-md'
 					onClick={() => {
 						navigator.clipboard.writeText(
 							`https://t.me/celiscope_bot/celiscope?startapp=${user?.inviteCode}`
@@ -81,7 +73,7 @@ export function SettingsFriendsGoals() {
 										<ChevronDownIcon size={26} />
 									</div>
 								</summary>
-								<div className='bg-white border-2 border-[#27448D] rounded-b-md p-4 flex items-center flex-col'>
+								<div className='bg-white border-2 border-[#27448D] rounded-b-md p-4 flex items-center flex-col gap-2.5'>
 									{friendGoals ? (
 										friendGoals?.map((friendGoal: any, index: number) => {
 											const subGoals = friendGoal.subGoals
@@ -89,7 +81,10 @@ export function SettingsFriendsGoals() {
 												(subGoal: SubGoal) => subGoal.isCompleted
 											)
 											const percent =
-												(completedSubGoals.length / subGoals.length) * 100 || 0
+												completedSubGoals.length === 0 && subGoals.length === 0
+													? 100
+													: (completedSubGoals.length / subGoals.length) *
+															100 || 0
 
 											const status =
 												percent === 100
