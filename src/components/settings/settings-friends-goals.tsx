@@ -101,9 +101,12 @@ export function SettingsFriendsGoals() {
 											return (
 												<div
 													key={friendGoal.id}
-													className='flex items-center justify-between w-full'
+													className='grid grid-cols-[1.3fr_1fr_1fr] w-full'
 												>
-													<h4 className='font-medium text-sm'>
+													<h4
+														className='font-medium text-sm'
+														style={{ wordBreak: 'break-word' }}
+													>
 														{index + 1}. {friendGoal.title}
 													</h4>
 													<span className='text-sm'>

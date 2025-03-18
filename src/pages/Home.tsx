@@ -18,7 +18,7 @@ export function HomePage() {
 			</div>
 			<HomeStatistics />
 			{isAuth && <HomeList />}
-			<HomeCreateGoal className='fixed bottom-5 right-5 [&_button]:aspect-square [&_button]:p-0 [&_button]:w-16 text-4xl [&_button]:h-16 [&_button]:flex [&_button]:items-center [&_button]:justify-center' />
+			<HomeCreateGoal className='fixed bottom-5 right-5 [&_button]:aspect-square [&_button]:px-3 [&_button]:py-1 text-4xl [&_button]:flex [&_button]:items-center [&_button]:justify-center' />
 		</section>
 	)
 }

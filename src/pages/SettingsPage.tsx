@@ -25,7 +25,7 @@ export function SettingsPage() {
 	const { mutateAsync: changeSettings } = useChangeSettings()
 
 	return (
-		<section className='relative'>
+		<section className='relative pb-10'>
 			<Link to='/' className='absolute top-3 right-3'>
 				<HomeIcon />
 			</Link>

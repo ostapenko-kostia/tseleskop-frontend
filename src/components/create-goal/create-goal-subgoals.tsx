@@ -145,10 +145,19 @@ export function CreateGoalSubGoal({
 								<div className='mt-3'>
 									Крайний срок
 									<input
-										type='date'
+										type='datetime-local'
 										onKeyDown={e => e.preventDefault()}
 										onChange={e => setSubGoalDateTemp(new Date(e.target.value))}
-										value={subGoalDateTemp?.toISOString().split('T')[0]}
+										value={
+											subGoalDateTemp
+												? new Date(
+														subGoalDateTemp.getTime() -
+															new Date().getTimezoneOffset() * 60000
+												  )
+														.toISOString()
+														.slice(0, 16)
+												: ''
+										}
 										className='w-full outline-none resize-none border mt-2 p-2 rounded-md border-gray-100'
 									/>
 								</div>
