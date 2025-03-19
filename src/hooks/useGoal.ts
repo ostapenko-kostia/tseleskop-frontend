@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { goalService } from '../services/goal.service'
 
@@ -22,9 +22,24 @@ export function useGetGoals() {
 		queryFn: async () => {
 			const res = await goalService.getGoals()
 			if (res?.status !== 200) throw new Error()
-			return res	
+			return res
 		},
 		refetchOnWindowFocus: false,
 		staleTime: Infinity,
+	})
+}
+
+export function useCompleteSubGoal(id: number) {
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: async () => {
+			const res = await goalService.completeSubGoal(id)
+			if (res?.status !== 200) throw new Error()
+			return res
+		},
+		onSuccess: () => {
+			toast.success('Задача успешно выполнена!')
+			queryClient.invalidateQueries({ queryKey: ['get goals'] })
+		},
 	})
 }

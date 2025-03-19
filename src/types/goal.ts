@@ -13,5 +13,6 @@ export interface SubGoal {
 	description: string;
 	deadline: Date
 	isCompleted: boolean
+	completedAt: Date
 	goalId: number	
 }

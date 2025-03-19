@@ -14,13 +14,31 @@ export const URGENCY_COLORS = {
 }
 
 export function HomeListItem({ goal, index }: Props) {
+	const isSubGoalsCompleted = goal.subGoals?.every(
+		subGoal => subGoal.isCompleted
+	)
+	const isSubGoalExpired = goal.subGoals?.some(
+		subGoal =>
+			new Date(subGoal.deadline) <
+			(subGoal.completedAt ? new Date(subGoal.completedAt) : new Date())
+	)
+
 	return (
 		<article className='flex w-full mb-4'>
 			<div className='w-12 min-h-12 h-full bg-[#27448D] text-white font-bold text-xl flex items-center justify-center'>
 				{index}
 			</div>
 			<details className='w-full'>
-				<summary className='text-white px-2 flex items-center py-0.5 text-lg appearance-none bg-[#27448D] max-[370px]:text-sm'>
+				<summary
+					className='text-white px-2 flex items-center py-0.5 text-lg appearance-none max-[370px]:text-sm'
+					style={{
+						background: isSubGoalExpired
+							? 'linear-gradient(90deg, #C61515 61.5%, #600A0A 100%)'
+							: isSubGoalsCompleted
+							? 'linear-gradient(90deg, #50AE1B 53%, #21480B 100%)'
+							: '#27448D',
+					}}
+				>
 					{goal.title}
 				</summary>
 				<div className='relative p-[3px] rounded-xl'>
@@ -52,7 +70,7 @@ export function HomeListItem({ goal, index }: Props) {
 								))}
 							</tbody>
 						</table>
-					<EditIcon className='mr-auto mt-3' />
+						<EditIcon className='mr-auto mt-3' />
 					</div>
 				</div>
 			</details>

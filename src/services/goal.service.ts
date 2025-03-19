@@ -8,6 +8,10 @@ class GoalService {
 	async getGoals() {
 		return await api.get('/goal')
 	}
+
+	async completeSubGoal(id: number) {
+		return await api.post(`/goal/sub-goal/${id}/complete`)
+	}
 }
 
 export const goalService = new GoalService()
