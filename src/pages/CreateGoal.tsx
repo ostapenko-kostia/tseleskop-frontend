@@ -17,6 +17,7 @@ import {
 	CreateGoalSubGoal,
 	CreateGoalTitleField,
 	CreateGoalUrgency,
+	CreateGoalImageField,
 } from '../components/create-goal'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
@@ -33,6 +34,7 @@ interface Form {
 	privacy: 'PRIVATE' | 'PUBLIC'
 	deadline: '3_MONTHS' | '6_MONTHS' | '1_YEAR'
 	subGoals?: { description: string; deadline: Date }[]
+	image: File
 }
 
 export function CreateGoal() {
@@ -75,7 +77,12 @@ export function CreateGoal() {
 
 			<CreateGoalTitle />
 
-			<form onSubmit={handleSubmit(data => createGoal({ data }))}>
+			<form
+				onSubmit={handleSubmit(data => {
+					console.log(data)
+					createGoal({ data })
+				})}
+			>
 				<section className='px-4 pt-5 flex flex-col gap-5 w-full'>
 					<CreateGoalTitleField register={register} />
 					<CreateGoalUrgency setValue={setValue} watch={watch} />
@@ -93,6 +100,7 @@ export function CreateGoal() {
 					<CreateGoalDescription register={register} />
 					<CreateGoalDeadline setValue={setValue} />
 					<CreateGoalSubGoal watch={watch} setValue={setValue} />
+					<CreateGoalImageField watch={watch} setValue={setValue} />
 					<CreateGoalAward register={register} />
 					<CreateGoalPrivacy setValue={setValue} />
 				</section>

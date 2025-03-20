@@ -43,7 +43,7 @@ export function HomeSubGoal({ subGoal, index }: Props) {
 						complete()
 						setIsCompleted(true)
 					}}
-					disabled={isCompleted || isExpired}
+					disabled={isCompleted}
 					defaultChecked={subGoal.isCompleted}
 					type='checkbox'
 					className='ml-auto checkbox'

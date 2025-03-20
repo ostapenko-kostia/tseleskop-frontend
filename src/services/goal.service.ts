@@ -1,8 +1,10 @@
 import { api } from '../lib/axios'
 
 class GoalService {
-	async createGoal(data: any) {
-		return await api.post(`/goal/create`, data)
+	async createGoal(formData: FormData) {
+		return await api.post(`/goal/create`, formData, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		})
 	}
 
 	async getGoals() {
@@ -11,6 +13,12 @@ class GoalService {
 
 	async completeSubGoal(id: number) {
 		return await api.post(`/goal/sub-goal/${id}/complete`)
+	}
+
+	async completeGoal(id: number, formData: FormData) {
+		return await api.post(`/goal/${id}/complete`, formData, {
+			headers: { 'Content-Type': 'multipart/form-data' },
+		})
 	}
 }
 

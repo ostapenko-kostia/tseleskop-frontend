@@ -1,18 +1,20 @@
-export interface Goal { 
+export interface Goal {
 	id: number
 	title: string
 	description: string
-	urgencyLevel: "low" | "average" | "high"
+	urgencyLevel: 'low' | 'average' | 'high'
 	deadline: Date
 	subGoals?: SubGoal[]
-	isDone: boolean
+	completedAt: Date
+	isCompleted: boolean
+	imageUrl: string
 }
 
-export interface SubGoal { 
+export interface SubGoal {
 	id: number
-	description: string;
+	description: string
 	deadline: Date
 	isCompleted: boolean
 	completedAt: Date
-	goalId: number	
+	goalId: number
 }

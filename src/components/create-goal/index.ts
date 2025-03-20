@@ -1,5 +1,6 @@
 export { CreateGoalTitle } from './create-goal-title'
 export { CreateGoalTitleField } from './create-goal-title-field'
+export { CreateGoalImageField } from './create-goal-image'
 export { CreateGoalUrgency } from './create-goal-urgency'
 export { CreateGoalSpecific } from './create-goal-specific'
 export { CreateGoalMeasurable } from './create-goal-measurable'
